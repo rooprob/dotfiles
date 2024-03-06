@@ -1,0 +1,7 @@
+#!/bin/bash
+
+[ -d ~/.config/alacritty ] || mkdir ~/.config/alacritty
+
+cp alacritty.toml ~/.config/alacritty
+
+
