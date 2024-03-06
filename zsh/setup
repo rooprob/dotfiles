@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ ! -d ~/.zsh ]; then
+  mkdir ~/.zsh
+fi
+
+if [ ! -d catppuccin ]; then
+  git clone https://github.com/catppuccin/zsh-syntax-highlighting.git catppuccin
+else
+  pushd catppuccin
+  git pull
+  popd
+fi
+
+if [ ! -d zsh-syntax-highlighting ]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting
+else
+  pushd zsh-syntax-highlighting
+  git pull
+  popd
+fi
+
+rsync -av zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins
+rsync -av catppuccin/ ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/

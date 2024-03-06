@@ -2,6 +2,9 @@
 
 [ -d ~/.config/alacritty ] || mkdir ~/.config/alacritty
 
+
+curl -LO --output-dir ~/.config/alacritty https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml
+
 cp alacritty.toml ~/.config/alacritty
 
 

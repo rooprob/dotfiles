@@ -1,7 +1,5 @@
-# themes from https://github.com/alacritty/alacritty-theme
-
-# import = ["/Users/mischa/.config/alacritty/themes/themes/gruvbox_dark.toml"]
-import = ["~/.config/alacritty/themes/themes/gruvbox_dark.toml"]
+# https://github.com/catppuccin/alacritty?tab=readme-ov-file
+import = ["~/.config/alacritty/catppuccin-mocha.toml"]
 
 [font]
 size = 9
