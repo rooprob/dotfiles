@@ -1,5 +1,7 @@
 # https://github.com/catppuccin/alacritty?tab=readme-ov-file
-import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+# import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+# import = ["~/.config/alacritty/catppuccin-macchiato.toml"]
+import = ["~/.config/alacritty/falcon.toml"]
 
 [font]
 size = 9
