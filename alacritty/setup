@@ -10,7 +10,7 @@ curl -sLO https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml
 #curl -Lo ~/.config/alacritty/falcon.yml https://raw.githubusercontent.com/fenetikm/falcon/master/alacritty/alacritty.yml
 #alacritty migrate -c ~/.config/alacritty/falcon.yml
 
-# cp falcon.toml ~/.config/alacritty
+cp -a falcon.toml ~/.config/alacritty
 # cp catppuccin-mocha.toml ~/.config/alacritty
 cp -a rooprob-catppuccin-mocha.toml ~/.config/alacritty
 cp -a alacritty.toml ~/.config/alacritty
