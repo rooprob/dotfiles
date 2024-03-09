@@ -3,13 +3,17 @@
 [ -d ~/.config/alacritty ] || mkdir ~/.config/alacritty
 
 
-curl -LO --output-dir ~/.config/alacritty https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml
-curl -LO --output-dir ~/.config/alacritty https://github.com/catppuccin/alacritty/raw/main/catppuccin-macchiato.toml
+#curl -LO --output-dir ~/.config/alacritty https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml
+#curl -LO --output-dir ~/.config/alacritty https://github.com/catppuccin/alacritty/raw/main/catppuccin-macchiato.toml
+curl -sLO https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml
 
 #curl -Lo ~/.config/alacritty/falcon.yml https://raw.githubusercontent.com/fenetikm/falcon/master/alacritty/alacritty.yml
 #alacritty migrate -c ~/.config/alacritty/falcon.yml
 
-cp falcon.toml ~/.config/alacritty
-cp alacritty.toml ~/.config/alacritty
+# cp falcon.toml ~/.config/alacritty
+# cp catppuccin-mocha.toml ~/.config/alacritty
+cp -a rooprob-catppuccin-mocha.toml ~/.config/alacritty
+cp -a alacritty.toml ~/.config/alacritty
+touch ~/.config/alacritty
 
 
