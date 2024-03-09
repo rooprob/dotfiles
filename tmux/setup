@@ -10,5 +10,6 @@ popd
 cp tmux.conf ~/.config/tmux/tmux.conf
 
 rsync -a plugins/catppuccin-tmux ~/.config/tmux/plugins
+rsync -a plugins/falcon-tmux ~/.config/tmux/plugins
 tmux source-file ~/.config/tmux/tmux.conf || true
 
