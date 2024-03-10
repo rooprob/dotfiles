@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp keyboard.default /etc/default/keyboard
+dpkg-reconfigure keyboard-configuration
