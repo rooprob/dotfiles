@@ -1,20 +1,18 @@
 #!/bin/bash
 
-
 if [ ! -e nvim-linux64.tar.gz ]; then
 	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 	sudo rm -fr /opt/nvim
 	sudo tar -C /opt -xzf nvim-linux64.tar.gz
 fi
 
-if [ ! -d ~/.config/nvim ] ; then
-	git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+if [ ! -d ~/.config/nvim ]; then
+	git clone https://github.com/LazyVim/starter ~/.config/nvim
+	# git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 else
 	pushd ~/.config/nvim
 	git pull
 	popd
 fi
 
-rsync -av lua/custom/ ~/.config/nvim/lua/custom/
-
-
+rsync -av lua/ ~/.config/nvim/lua/
