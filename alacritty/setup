@@ -2,7 +2,6 @@
 
 [ -d ~/.config/alacritty ] || mkdir ~/.config/alacritty
 
-
 #curl -LO --output-dir ~/.config/alacritty https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml
 #curl -LO --output-dir ~/.config/alacritty https://github.com/catppuccin/alacritty/raw/main/catppuccin-macchiato.toml
 curl -sLO https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml
@@ -16,4 +15,5 @@ cp -a rooprob-catppuccin-mocha.toml ~/.config/alacritty
 cp -a alacritty.toml ~/.config/alacritty
 touch ~/.config/alacritty
 
-
+# sudo desktop-file-install Alacritty.desktop
+# sudo update-desktop-database

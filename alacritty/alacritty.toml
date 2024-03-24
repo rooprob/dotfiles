@@ -4,7 +4,7 @@
 import = ["~/.config/alacritty/falcon.toml"]
 
 [font]
-size = 9
+size = 11
 
 [font.normal]
 family = "BlexMono Nerd Font Mono"
