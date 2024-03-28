@@ -6,7 +6,12 @@ return {
 		"LazyVim/LazyVim",
 		opts = {
 			colorscheme = "falcon",
-			background_color = "#000000",
+		},
+	},
+	{
+		"nvim-notify",
+		opts = {
+			background_colour = "#000000",
 		},
 	},
 	{
