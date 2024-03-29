@@ -1,20 +1,5 @@
 return {
 	{
-		"fenetikm/falcon",
-	},
-	{
-		"LazyVim/LazyVim",
-		opts = {
-			colorscheme = "falcon",
-		},
-	},
-	{
-		"nvim-notify",
-		opts = {
-			background_colour = "#000000",
-		},
-	},
-	{
 		"christoomey/vim-tmux-navigator",
 		cmd = {
 			"TmuxNavigateLeft",

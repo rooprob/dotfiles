@@ -15,4 +15,4 @@ else
 	popd
 fi
 
-rsync -av lua/ ~/.config/nvim/lua/
+rsync -av --delete lua/ ~/.config/nvim/lua/
