@@ -5,7 +5,7 @@ return {
 			servers = {
 				pyright = {},
 				bashls = {},
-				-- gopls = {},
+				gopls = {},
 				bicep = {},
 				yamlls = {},
 				marksman = {},
