@@ -1,0 +1,43 @@
+# vim: set ft=sh:
+
+_create_dir() {
+	[ ! -d "$1" ] && mkdir -p "$1"
+}
+
+# second brain
+SECOND_HOME=$HOME/second
+_create_dir "$SECOND_HOME"
+
+# inbox
+# zet entries
+INBOX_HOME=$SECOND_HOME/0-inbox
+_create_dir "$INBOX_HOME"
+
+# kindle-highlights
+KINDLE_HOME=$SECOND_HOME/kindle-highlights
+_create_dir "$KINDLE_HOME"
+
+# zettelkasten
+# short thoughts, carefully linked
+ZETTEL_HOME=$SECOND_HOME/zettel
+_create_dir "$ZETTEL_HOME"
+
+# para - tiago forte
+# highly organized, related notes - still following the zettelkasten method
+PARA_PROJECTS_HOME=$SECOND_HOME/01-proj
+# responsibilities
+PARA_AREAS_HOME=$SECOND_HOME/02-areas
+PARA_RESOURCES_HOME=$SECOND_HOME/03-resources
+PARA_ARCHIVE_HOME=$SECOND_HOME/04-archive
+
+_create_dir "$PARA_PROJECTS_HOME"
+_create_dir "$PARA_AREAS_HOME"
+_create_dir "$PARA_RESOURCES_HOME"
+_create_dir "$PARA_ARCHIVE_HOME"
+
+# website
+WEBSITE_HOME=$HOME/websites
+
+BLOG_HOME=$WEBSITE_HOME/blog
+_create_dir "$WEBSITE_HOME"
+_create_dir "$BLOG_HOME"
