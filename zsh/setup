@@ -23,3 +23,4 @@ fi
 rsync -av zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins
 rsync -av catppuccin/ ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/
 rsync -av .zshrc ~/.zshrc
+rsync -av .zsecond ~/.zsecond

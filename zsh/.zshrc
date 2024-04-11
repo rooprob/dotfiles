@@ -43,7 +43,7 @@ fi
 
 eval "$(pyenv init -)" # this makes pyenv work in the shell
 eval "$(pyenv virtualenv-init - zsh)"
-source /home/me/.pyenv/completions/pyenv.zsh
+source $PYENV_ROOT/completions/pyenv.bash
 
 eval "$(rbenv init -)"
 
@@ -59,7 +59,6 @@ eval "$(rbenv init -)"
 export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 export GOPATH=~/go
 export EDITOR=nvim
-
 alias vim=nvim
 
 test -n "${terminfo[kcuu1]}" && bindkey "${terminfo[kcuu1]}" up-line-or-history
@@ -74,7 +73,4 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 export SECOND_HOME=$HOME/second
 
-alias dotfiles="nvim ~/projects/dotfiles/"
-alias zettel="nvim ~/zettel/"
-alias scan='(cd ~/projects/galatos-pos && nvim .)'
-alias tix='(cd ~/projects/galatos/galatos-tickets/backend && nvim .)'
+source "$HOME"/.zsecond
