@@ -1,0 +1,55 @@
+#!/bin/bash
+# vim: set filetype=sh :
+# author: robf
+# description: simple notes creating script
+# date: 2024-04-08
+
+if [ -z "$1" ] || [ -z "$2" ]; then
+	echo "usage: $0 section title_like_this"
+	exit 1
+fi
+
+section="$1"
+title="$2"
+
+if [ ! -e "$HOME/.config/second/home" ]; then
+	echo "error: you must configure ~/.config/second/home"
+	exit 1
+fi
+source "$HOME/.config/second/home"
+
+SECTION_DIR=$SECOND_HOME/$section
+
+[ ! -d "$SECTION_DIR" ] && mkdir -p "$SECTION_DIR"
+
+date_today=$(date -I)
+time_now=$(date +'%Y-%m-%dT%H:%M:%S%Z')
+filename=$SECTION_DIR/$title
+
+if [ ! -e "$filename" ]; then
+	cat >"$filename" <<TEMPLATE
+---
+title: $title
+author: robf
+section: $section
+date: $date_today
+labels:
+
+---
+# $title
+
+---
+[comment]: <> ($time_now)
+[comment]: <> (vim: set filetype=markdown)
+
+TEMPLATE
+
+fi
+
+GP=$(ps -o ppid= -p $PPID | xargs -n 1 ps -o ppid=,comm= -p)
+
+# echo $GP
+
+if ! echo "$GP" | grep nvim >/dev/null; then
+	nvim "$filename"
+fi

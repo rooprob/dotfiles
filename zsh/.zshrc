@@ -56,8 +56,8 @@ eval "$(rbenv init -)"
 # source ~/.zplug/init.zsh
 # zplug "avivl/gcloud-project", use:init.sh
 
-export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 export GOPATH=~/go
+export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 export EDITOR=nvim
 alias vim=nvim
 
@@ -71,6 +71,11 @@ unsetopt share_history
 
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
-export SECOND_HOME=$HOME/second
+if [ ! -e "$HOME/.config/second/home" ]; then
+	echo "error: you must configure ~/.config/second/home"
+	exit 1
+fi
+source $HOME/.config/second/home
+export SECOND_HOME
 
 source "$HOME"/.zsecond
