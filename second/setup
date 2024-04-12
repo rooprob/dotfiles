@@ -1,5 +1,7 @@
 #!/bin/bash
 # vim: set ft=sh:
+#
+# requires: ~/.config/second/home exports into shell, see ~/.zshrc
 
 _create_dir() {
 	echo "log: checking $1"
@@ -7,12 +9,6 @@ _create_dir() {
 }
 
 # second brain
-if [ ! -e "$HOME/.config/second/home" ]; then
-	echo "error: you must configure ~/.config/second/home"
-	exit 1
-fi
-source $HOME/.config/second/home
-
 _create_dir "$SECOND_HOME"
 
 # kindle-highlights
