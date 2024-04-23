@@ -1,6 +1,18 @@
 #!/bin/bash
 
-cp keyboard.default /etc/default/keyboard
-dpkg-reconfigure keyboard-configuration
-gsettings get org.gnome.desktop.input-sources xkb-options
-gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+diff=$(md5sum /etc/default/keyboard keyboard.default | awk '{ print $1 }' | uniq | wc -l)
+
+if [ "$diff" -eq 1 ]; then
+	exit 0
+fi
+
+sudo rsync -a keyboard.default /etc/default/keyboard
+sudo dpkg-reconfigure keyboard-configuration
+
+wanted='['\''ctrl:nocaps'\'']'
+current=$(gsettings get org.gnome.desktop.input-sources xkb-options)
+
+echo "current xkb-options: $current"
+if [ "$wanted" != "$current" ]; then
+	gsettings set org.gnome.desktop.input-sources xkb-options \"['ctrl:nocaps']\"
+fi

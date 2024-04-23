@@ -1,12 +1,12 @@
 #!/bin/bash
 
-
 if [ ! -e ~/Downloads/IBMPlexMono.zip ]; then
-  curl -fLo ~/Downloads/IBMPlexMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/IBMPlexMono.zip
+	curl -fLo ~/Downloads/IBMPlexMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/IBMPlexMono.zip
 fi
-pushd ~/.fonts
-unzip ~/Downloads/IBMPlexMono.zip
-popd
+if [ ! -e ~/.fonts/BlexMonoNerdFont-BoldItalic.ttf ]; then
+	pushd ~/.fonts || exit
+	unzip ~/Downloads/IBMPlexMono.zip
+	popd || exit
 
-fc-cache -fv
-
+	fc-cache -fv
+fi
