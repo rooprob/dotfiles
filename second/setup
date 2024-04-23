@@ -3,8 +3,13 @@
 #
 # requires: ~/.config/second/home exports into shell, see ~/.zshrc
 
+if [ -z "$SECOND_HOME" ]; then
+	echo "❌SECOND_HOME not set!"
+	exit 1
+fi
+
 _create_dir() {
-	echo "log: checking $1"
+	echo "🧠 installing $1"
 	[ ! -d "$1" ] && mkdir -p "$1"
 }
 

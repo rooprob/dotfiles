@@ -39,7 +39,6 @@ if [ -d "$HOME/.local/bin" ]; then
 	PATH="$HOME/.local/bin:$PATH"
 fi
 # fetchmail -s -d 60
-#eval "$(pyenv init --path)"
 
 eval "$(pyenv init -)" # this makes pyenv work in the shell
 eval "$(pyenv virtualenv-init - zsh)"

@@ -3,7 +3,7 @@
 # author: robf
 #
 
-things="alacritty fonts keyboard"
+things="alacritty fonts keyboard llamafile nvim scripts second tmux zsh"
 
 log() {
 	echo "$1"
