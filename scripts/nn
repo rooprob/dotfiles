@@ -24,7 +24,7 @@ SECTION_DIR=$SECOND_HOME/$section
 
 date_today=$(date -I)
 time_now=$(date +'%Y-%m-%dT%H:%M:%S%Z')
-filename=$SECTION_DIR/$title
+filename=$SECTION_DIR/${title}.md
 
 if [ ! -e "$filename" ]; then
 	cat >"$filename" <<TEMPLATE
@@ -40,7 +40,6 @@ labels:
 
 ---
 [comment]: <> ($time_now)
-[comment]: <> (vim: set filetype=markdown)
 
 TEMPLATE
 
