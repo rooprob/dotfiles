@@ -1,0 +1,7 @@
+#!/bin/bash
+# vim: set ft=sh:
+#
+# adds  ~/.config/second/home exports into shell, see ~/.zshrc
+
+[ -d ~/.config/second ] && mkdir -p ~/.config/second
+rsync -a home ~/.config/second/home

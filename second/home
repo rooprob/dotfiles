@@ -1,0 +1,5 @@
+export SECOND_HOME=$HOME/second
+export KINDLE_HOME=$SECOND_HOME/kindle-highlights
+export WEBSITE_HOME=$HOME/websites
+export BLOG_HOME=$WEBSITE_HOME/blog
+
