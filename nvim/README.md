@@ -11,7 +11,7 @@
 - [x] extra plugins, [lualine]
 - [x] lsp, with mason for python, none-ls and others
 - [x] navigation
-- [x] snippets
+- [x] snippets with [nvim-cmp]
 - [ ] finger muscle memory exercises
 - [ ] integrate extras: chatGPT
 - [ ] note taking app
@@ -27,3 +27,5 @@
 [mason-lspconfig]: https://github.com/williamboman/mason-lspconfig.nvim
 [lspconfig]: https://github.com/neovim/nvim-lspconfig
 [telescope-ui-select]:https://github.com/nvim-telescope/telescope-ui-select.nvim
+[nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
+[cmp_nvim_lsp]: https://github.com/hrsh7th/cmp-nvim-lsp
