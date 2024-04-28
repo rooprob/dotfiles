@@ -1,8 +1,17 @@
 #!/bin/bash
-
+set -x
 curl -LO -z nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-sudo rm -fr /opt/nvim
-sudo tar -C /opt -xzf nvim-linux64.tar.gz
+chksum=$(md5sum nvim-linux64.tar.gz | cut -f1 -d\ )
+if [ ! -e  "nvim.chk" ]; then
+    echo $chksum  > nvim.chk
+fi
+previous_chksum=$(<nvim.chk)
+if [ "$chksum" != "$previous_chksum" ]; then
+    echo "Needing sudo password please ..."
+    sudo rm -fr /opt/nvim
+    sudo tar -C /opt -xzf nvim-linux64.tar.gz
+    echo $chksum  > nvim.chk
+fi
 
 if [ ! -d ~/.config/nvim ]; then
 	git clone https://github.com/LazyVim/starter ~/.config/nvim
