@@ -8,7 +8,9 @@
 - [x] live grep <leader>fg 
 - [x] language support with [treesitter]
 - [x] neotree
+- [x] extra plugins, [lualine]
 - [ ] lsp
+- [ ] navigation
 - [ ] finger muscle memory exercises
 - [ ] integrate extras: chatGPT
 - [ ] note taking app
@@ -19,3 +21,4 @@
 [telescope]: https://github.com/nvim-telescope/telescope.nvim
 [treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
 [neotree]: https://github.com/nvim-neo-tree/neo-tree.nvim
+[lualine]: https://github.com/nvim-lualine/lualine.nvim
