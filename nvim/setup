@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+# set -x
 curl -LO -z nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 chksum=$(md5sum nvim-linux64.tar.gz | cut -f1 -d\ )
 if [ ! -e  "nvim.chk" ]; then
@@ -13,13 +13,13 @@ if [ "$chksum" != "$previous_chksum" ]; then
     echo $chksum  > nvim.chk
 fi
 
-if [ ! -d ~/.config/nvim ]; then
-	git clone https://github.com/LazyVim/starter ~/.config/nvim
-else
-	pushd ~/.config/nvim || exit
-	git pull
-	popd || exit
-fi
+# if [ ! -d ~/.config/nvim ]; then
+# 	git clone https://github.com/LazyVim/starter ~/.config/nvim
+# else
+# 	pushd ~/.config/nvim || exit
+# 	git pull
+# 	popd || exit
+# fi
 
 rsync -av init.lua ~/.config/nvim/
 rsync -av --delete lua/ ~/.config/nvim/lua/
