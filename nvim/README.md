@@ -3,7 +3,7 @@
 ## Goals
 
 - [ ] build understanding neovim through setting up dev environment
-- [ ] init
+- [x] init, and modular
 - [x] find files C-p with [telescope]
 - [x] live grep <leader>fg 
 - [x] language support with [treesitter]
