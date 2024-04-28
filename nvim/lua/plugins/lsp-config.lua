@@ -29,39 +29,39 @@ return {
             lspconfig.lua_ls.setup({
                 capabilities = capabilities,
             })
-            --			lspconfig.bashls.setup({
-            --				capabilities = capabilities,
-            --			})
-            --			lspconfig.clangd.setup({
-            --				capabilities = capabilities,
-            --			})
-            --			lspconfig.eslint.setup({
-            --				capabilities = capabilities,
-            --			})
-            --			lspconfig.gopls.setup({
-            --				capabilities = capabilities,
-            --			})
-            --			lspconfig.gradle_ls.setup({
-            --				capabilities = capabilities,
-            --			})
-            --			lspconfig.jdtls.setup({
-            --				capabilities = capabilities,
-            --			})
-            --			lspconfig.marksman.setup({
-            --				capabilities = capabilities,
-            --			})
-            --			lspconfig.pyright.setup({
-            --				capabilities = capabilities,
-            --			})
-            --			lspconfig.ruff_lsp.setup({
-            --				capabilities = capabilities,
-            --			})
-            --			lspconfig.tsserver.setup({
-            --				capabilities = capabilities,
-            --			})
-            --			lspconfig.yamlls.setup({
-            --				capabilities = capabilities,
-            --			})
+			lspconfig.bashls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.clangd.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.eslint.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.gopls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.gradle_ls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.jdtls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.marksman.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.pyright.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.ruff_lsp.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.tsserver.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.yamlls.setup({
+				capabilities = capabilities,
+			})
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
