@@ -10,7 +10,7 @@
 - [x] neotree
 - [x] extra plugins, [lualine]
 - [ ] lsp
-- [ ] navigation
+- [x] navigation
 - [ ] finger muscle memory exercises
 - [ ] integrate extras: chatGPT
 - [ ] note taking app
