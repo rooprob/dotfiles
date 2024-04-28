@@ -12,11 +12,10 @@ fi
 section="$1"
 title="$2"
 
-if [ ! -e "$HOME/.config/second/home" ]; then
+if [ -z "$SECOND_HOME" ]; then
 	echo "error: you must configure ~/.config/second/home"
 	exit 1
 fi
-source "$HOME/.config/second/home"
 
 SECTION_DIR=$SECOND_HOME/$section
 
