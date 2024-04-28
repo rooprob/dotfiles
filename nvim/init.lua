@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("vim-options")
 require("lazy").setup({
-    spec = "plugins", 
+    spec = "plugins",
     defaults = {},
     install = {},
 })
