@@ -9,8 +9,9 @@
 - [x] language support with [treesitter]
 - [x] neotree
 - [x] extra plugins, [lualine]
-- [x] lsp, with mason for python, and others
+- [x] lsp, with mason for python, none-ls and others
 - [x] navigation
+- [x] snippets
 - [ ] finger muscle memory exercises
 - [ ] integrate extras: chatGPT
 - [ ] note taking app
