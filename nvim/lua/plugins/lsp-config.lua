@@ -1,4 +1,5 @@
 return {
+    -- install our lsps
     {
         "williamboman/mason.nvim",
         config = function()
@@ -6,6 +7,7 @@ return {
         end
     },
 
+    -- install specific lsps
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
@@ -30,6 +32,8 @@ return {
 
         end
     },
+
+    -- hook up lsp with actions
     {"neovim/nvim-lspconfig",
         config = function()
             local lspconfig = require('lspconfig')

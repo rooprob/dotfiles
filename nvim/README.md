@@ -22,7 +22,7 @@
 [treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
 [neotree]: https://github.com/nvim-neo-tree/neo-tree.nvim
 [lualine]: https://github.com/nvim-lualine/lualine.nvim
-[mason]: https://github.com/williamboman/mason.nvim
+[mason]: https://github.com/williambomanpyright/mason.nvim
 [mason-lspconfig]: https://github.com/williamboman/mason-lspconfig.nvim
 [lspconfig]: https://github.com/neovim/nvim-lspconfig
 [telescope-ui-select]:https://github.com/nvim-telescope/telescope-ui-select.nvim
