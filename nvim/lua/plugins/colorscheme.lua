@@ -1,13 +1,11 @@
 return {
-	-- the colorscheme should be available when starting Neovim
+	-- add falcon colorscheme
+	{ "fenetikm/falcon" },
+	-- fixup to stop spurious warning
 	{
-		"fenetikm/falcon",
-		lazy = false,
-		priority = 1000,
-
-		config = function()
-			vim.cmd("colorscheme falcon")
-			vim.cmd("set termguicolors")
-		end,
+		"nvim-notify",
+		opts = {
+			background_colour = "#000000",
+		},
 	},
 }
