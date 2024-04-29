@@ -1,3 +1,8 @@
 #!/bin/bash
 
+if [ -z "$PRIVATE_BIN" ]; then
+	echo "error: need to export PRIVATE_BIN"
+	exit 1
+fi
+
 rsync -avx --exclude setup . "$PRIVATE_BIN"/
