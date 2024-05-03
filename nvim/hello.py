@@ -3,7 +3,6 @@
 
 MY_NUMBER = 1_000
 
-
 def say_hello(name: str):
     """
     This is a function that says Hi.

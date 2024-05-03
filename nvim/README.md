@@ -2,6 +2,7 @@
 
 Based on theprimeagen zero to lsp.
 
+
 ## Goals
 
 - [x] build understanding neovim through setting up dev environment
