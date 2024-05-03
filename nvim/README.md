@@ -1,11 +1,13 @@
 # NeoVIM
 
+Based on theprimeagen zero to lsp.
+
 ## Goals
 
 - [x] build understanding neovim through setting up dev environment
 - [x] init, and modular
 - [x] find files C-p with [telescope]
-- [x] live grep <leader>fg 
+- [x] live grep <leader>fg
 - [x] language support with [treesitter]
 - [x] neotree
 - [x] extra plugins, [lualine]
@@ -13,7 +15,7 @@
 - [x] navigation
 - [x] snippets with [nvim-cmp]
 - [x] debugging, [debug-adapter-protocol]
-- [ ] python, special considerions for pyenv 
+- [ ] python, special considerions for pyenv
 - [ ] finger muscle memory exercises
 - [ ] integrate extras: chatGPT
 - [ ] note taking app
