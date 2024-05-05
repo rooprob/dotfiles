@@ -22,6 +22,7 @@ fi
 #
 # rsync -av zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins
 # rsync -av catppuccin/ ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/
+rsync -av .zshenv ~/.zshenv
 rsync -av .zshrc ~/.zshrc
 
 if [ ! -e "$HOME"/.zsecond ]; then

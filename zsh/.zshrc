@@ -1,50 +1,36 @@
-# vim: set ft=sh:
-
+# vim: set ft=bash:
+if [ "$enable_profile" = "1" ]; then
+    zmodload zsh/zprof
+fi
+#
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-
-# ZSH_THEME=cloud
 ZSH_THEME=rooprob
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git
-	dotenv
-	nvm
-	npm
-	zsh-syntax-highlighting)
+ 	dotenv
+ 	nvm
+ 	# npm
+ 	zsh-syntax-highlighting)
 
+zstyle ':omz:plugins:nvm' lazy yes
 source $ZSH/oh-my-zsh.sh
 
 export PYENV_ROOT="$HOME/.pyenv"
 export RBENV_ROOT="$HOME/.rbenv"
-export PATH="/opt/nvim-linux64/bin:$HOME/.cargo/bin:$PYENV_ROOT/bin:$RBENV_ROOT/bin:$PATH:/opt/geth:/opt/idea/bin"
-
-# set PATH so it includes user's private bin if it exists
+export GOPATH=~/go
 export PRIVATE_BIN=$HOME/.bin
-if [ -d "$PRIVATE_BIN" ]; then
-	PATH="$PRIVATE_BIN:$PATH"
-fi
+export PATH="$PRIVATE_BIN:$HOME/.local/bin:$GOPATH/bin:/opt/nvim-linux64/bin:$HOME/.cargo/bin:$PYENV_ROOT/bin:$RBENV_ROOT/bin:$PATH:/opt/idea/bin"
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ]; then
-	PATH="$HOME/.local/bin:$PATH"
-fi
 # fetchmail -s -d 60
 
 eval "$(pyenv init -)" # this makes pyenv work in the shell
 eval "$(pyenv virtualenv-init - zsh)"
-source $PYENV_ROOT/completions/pyenv.bash
-
-eval "$(rbenv init -)"
+# source $PYENV_ROOT/completions/pyenv.bash
+# eval "$(rbenv init -)"
 
 # The next line updates PATH for the Google Cloud SDK.
 # if [ -f '/home/me/projects/gcp-functions/google-cloud-sdk/path.zsh.inc' ]; then . '/home/me/projects/gcp-functions/google-cloud-sdk/path.zsh.inc'; fi
@@ -52,11 +38,6 @@ eval "$(rbenv init -)"
 # The next line enables shell command completion for gcloud.
 # if [ -f '/home/me/projects/gcp-functions/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/me/projects/gcp-functions/google-cloud-sdk/completion.zsh.inc'; fi
 
-# source ~/.zplug/init.zsh
-# zplug "avivl/gcloud-project", use:init.sh
-
-export GOPATH=~/go
-export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 export EDITOR=nvim
 alias vim=nvim
 
@@ -70,11 +51,20 @@ unsetopt share_history
 
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
-if [ ! -e "$HOME/.config/second/home" ]; then
-	echo "error: you must configure ~/.config/second/home"
-	exit 1
-fi
+# if [ ! -e "$HOME/.config/second/home" ]; then
+# 	echo "error: you must configure ~/.config/second/home"
+# 	exit 1
+# fi
 source $HOME/.config/second/home
 export SECOND_HOME
 
 source "$HOME"/.zsecond
+
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
+
+if [ "$enable_profile" = "1" ]; then
+    zprof
+fi
