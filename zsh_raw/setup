@@ -1,0 +1,15 @@
+#!/bin/bash
+
+install -m 0644 .zshenv ~/.zshenv
+install -m 0644 .zshrc ~/.zshrc
+install -m 0644 .zlogin ~/.zlogin
+install -m 0644 .zlogout ~/.zlogout
+install -m 0644 .zprofile ~/.zprofile
+
+if [ ! -d "$HOME/.zsh/pure" ]; then
+    git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+fi
+
+if [ ! -e "$HOME"/.zsecond ]; then
+	touch ~/.zsecond
+fi
