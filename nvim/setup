@@ -1,5 +1,6 @@
 #!/bin/bash
 # set -x
+
 if [ ! -z "$INSTALL_NVIM" ]; then
 	curl -LO -z nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 	chksum=$(md5sum nvim-linux64.tar.gz | cut -f1 -d\ )
@@ -14,22 +15,14 @@ if [ ! -z "$INSTALL_NVIM" ]; then
 		echo $chksum >nvim.chk
 	fi
 
-    if [ -d "$HOME/.local/share/nvim" ]; then
-        rm -fr "$HOME/.local/share/nvim"
-    fi
-    if [ -d "$HOME/.config/nvim" ]; then
-        rm -fr "$HOME/.config/nvim"
-    fi
+	if [ -d "$HOME/.local/share/nvim" ]; then
+		rm -fr "$HOME/.local/share/nvim"
+	fi
+	if [ -d "$HOME/.config/nvim" ]; then
+		rm -fr "$HOME/.config/nvim"
+	fi
 fi
 
-# if [ ! -d ~/.config/nvim ]; then
-# 	git clone https://github.com/LazyVim/starter ~/.config/nvim
-# else
-# 	pushd ~/.config/nvim || exit
-# 	git pull
-# 	popd || exit
-# fi
-#
 [ -d ~/.config/nvim ] || mkdir ~/.config/nvim
 rsync -av init.lua ~/.config/nvim/init.lua
 rsync -av lua/ ~/.config/nvim/lua/
