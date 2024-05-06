@@ -31,10 +31,12 @@ return {
             require("mason").setup()
             require("mason-lspconfig").setup({
                 ensure_installed = {
-                    "lua_ls",
-                    "rust_analyzer",
+                    "bashls",
+                    "clangd",
                     "gopls",
-                    "pyright"
+                    "lua_ls",
+                    "pyright",
+                    "rust_analyzer",
                 },
                 handlers = {
                     function(server_name) -- default handler (optional)
@@ -57,11 +59,21 @@ return {
                             }
                         }
                     end,
+                    ["bashls"] = function()
+                        local lspconfig = require("lspconfig")
+                        lspconfig.bashls.setup {
+                            filetypes = { "sh", "zsh" },
+                            settings = {
+                                bashIde = {
+                                shfmt = { path = "/usr/bin/shfmt" }
+                                }
+                            }
+                        }
+                    end,
                 }
             })
 
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
             cmp.setup({
                 snippet = {
                     expand = function(args)
