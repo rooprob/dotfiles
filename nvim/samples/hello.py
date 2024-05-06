@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-"""This is a test script"""
+"""his is a test script"""
 
 MY_NUMBER = 1_000
 
+
 def say_hello(name: str):
     """
-    This is a function that says Hi.
+    This is a function that says hi
 
     args:
         name: str

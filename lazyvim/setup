@@ -22,14 +22,11 @@ if [ ! -z "$INSTALL_NVIM" ]; then
     fi
 fi
 
-# if [ ! -d ~/.config/nvim ]; then
-# 	git clone https://github.com/LazyVim/starter ~/.config/nvim
-# else
-# 	pushd ~/.config/nvim || exit
-# 	git pull
-# 	popd || exit
-# fi
-#
-[ -d ~/.config/nvim ] || mkdir ~/.config/nvim
-rsync -av init.lua ~/.config/nvim/init.lua
+if [ ! -d ~/.config/nvim ]; then
+ 	git clone https://github.com/LazyVim/starter ~/.config/nvim
+ else
+ 	pushd ~/.config/nvim || exit
+ 	git pull
+ 	popd || exit
+fi
 rsync -av lua/ ~/.config/nvim/lua/
