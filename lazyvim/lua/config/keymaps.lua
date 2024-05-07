@@ -74,3 +74,55 @@ vim.keymap.set("n", "=", "<cmd>vertical resize +5<cr>") -- make the window biger
 vim.keymap.set("n", "-", "<cmd>vertical resize -5<cr>") -- make the window smaller vertically
 vim.keymap.set("n", "+", "<cmd>horizontal resize +2<cr>") -- make the window bigger horizontally by pressing shift and =
 vim.keymap.set("n", "_", "<cmd>horizontal resize -2<cr>") -- make the window smaller horizontally by pressing shift and -
+
+vim.keymap.set("n", "<S-h>", function()
+	local bufs = vim.api.nvim_list_bufs()
+	local cb = vim.api.nvim_get_current_buf()
+
+	-- are we on the head of the active list
+	local is_head = false
+	for i, v in ipairs(bufs) do
+		if vim.api.nvim_buf_is_loaded(v) then
+			if is_head == false then
+				is_head = true
+			end
+		end
+		if is_head then
+			if v == cb then
+				print("would move to window left...")
+				vim.cmd("TmuxNavigateLeft")
+				return
+			end
+			break
+		end
+	end
+
+	print("moving to buffer left...")
+	vim.cmd("BufferLineCyclePrev")
+end, { desc = "Prev Buffer" })
+
+vim.keymap.set("n", "<S-l>", function()
+	local bufs = vim.api.nvim_list_bufs()
+	local cb = vim.api.nvim_get_current_buf()
+
+	-- are we on the tail of the active list
+	local is_tail = false
+	for i = #bufs, 1, -1 do
+		if vim.api.nvim_buf_is_loaded(bufs[i]) then
+			if is_tail == false then
+				is_tail = true
+			end
+		end
+		if is_tail then
+			if bufs[i] == cb then
+				print("would move to window right...")
+				vim.cmd("TmuxNavigateRight")
+				return
+			end
+			break
+		end
+	end
+
+	print("moving to buffer right...")
+	vim.cmd("BufferLineCycleNext")
+end, { desc = "Next Buffer" })
