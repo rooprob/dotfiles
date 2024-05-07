@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 vim.keymap.set("i", "jk", "<ESC>", { silent = true })
 
-vim.keymap.set("n", "<leader>pv", "<cmd>:Neotree position=left<cr>")
+vim.keymap.set("n", "<leader>pv", "<cmd>:Neotree position=left<cr>", { desc = "Open Filesystem tree" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -51,3 +51,26 @@ vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>")
 vim.keymap.set("n", "<leader><leader>", function()
 	vim.cmd("so")
 end)
+
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "Project files" })
+vim.keymap.set("n", "<leader>pt", builtin.git_files, { desc = "Search git files" })
+
+vim.keymap.set("n", "<leader>pg", function()
+	local word = vim.fn.expand("<cword>")
+	builtin.grep_string({ search = word })
+end, { desc = "Project word search" })
+
+vim.keymap.set("n", "<leader>pG", function()
+	local word = vim.fn.expand("<cWORD>")
+	builtin.grep_string({ search = word })
+end, { desc = "Project WORD search" })
+
+vim.keymap.set("n", "<leader>ph", builtin.help_tags, { desc = "Project help" })
+vim.keymap.set("n", "<leader>pb", builtin.buffers, { desc = "Project buffers" })
+
+-- https://www.reddit.com/r/neovim/comments/10wru1c/how_do_i_resize_windows/
+vim.keymap.set("n", "=", "<cmd>vertical resize +5<cr>") -- make the window biger vertically
+vim.keymap.set("n", "-", "<cmd>vertical resize -5<cr>") -- make the window smaller vertically
+vim.keymap.set("n", "+", "<cmd>horizontal resize +2<cr>") -- make the window bigger horizontally by pressing shift and =
+vim.keymap.set("n", "_", "<cmd>horizontal resize -2<cr>") -- make the window smaller horizontally by pressing shift and -
