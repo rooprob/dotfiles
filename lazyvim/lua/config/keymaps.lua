@@ -19,6 +19,10 @@ vim.keymap.set("n", "<leader>svwm", function()
 	require("vim-with-me").StopVimWithMe()
 end)
 
+-- stop tmux alt-jk moving lines
+vim.keymap.set({ "n", "i" }, "<A-j>", "")
+vim.keymap.set({ "n", "i" }, "<A-k>", "")
+
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
