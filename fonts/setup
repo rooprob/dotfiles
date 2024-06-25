@@ -3,6 +3,9 @@
 if [ ! -e ~/Downloads/IBMPlexMono.zip ]; then
 	curl -fLo ~/Downloads/IBMPlexMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/IBMPlexMono.zip
 fi
+if [ ! -d ~/.fonts ]; then
+	mkdir ~/.fonts
+fi
 if [ ! -e ~/.fonts/BlexMonoNerdFont-BoldItalic.ttf ]; then
 	pushd ~/.fonts || exit
 	unzip ~/Downloads/IBMPlexMono.zip
