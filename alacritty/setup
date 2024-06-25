@@ -10,6 +10,8 @@
 # curl -Lo ~/.config/alacritty/falcon.yml https://raw.githubusercontent.com/fenetikm/falcon/master/alacritty/alacritty.yml
 # alacritty migrate -c ~/.config/alacritty/falcon.yml
 
+sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+
 cargo install alacritty
 rsync -a falcon.toml ~/.config/alacritty
 rsync -a alacritty.toml ~/.config/alacritty
