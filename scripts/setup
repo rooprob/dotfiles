@@ -5,4 +5,6 @@ if [ -z "$PRIVATE_BIN" ]; then
 	exit 1
 fi
 
+cargo install ccase
+
 rsync -avx --exclude setup . "$PRIVATE_BIN"/
