@@ -1,1 +1,1 @@
-echo $@ | ccase -t title
+ccase -t title -
