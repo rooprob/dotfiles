@@ -14,6 +14,13 @@ if [ -d "$PRIVAE_BIN" ]; then
 	PATH="$PRIVATE_BIN:$PATH"
 fi
 
+if [ -e "$HOME/.config/second/home" ]; then
+	# export the variables from config
+	set -a
+	. $HOME/.config/second/home
+	set +a
+fi
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ]; then
 	PATH="$HOME/.local/bin:$PATH"
