@@ -1,4 +1,5 @@
 zsh/.zsecond
 bash/.second
+frame/frame
 *.tar.gz
 nvim.chk
