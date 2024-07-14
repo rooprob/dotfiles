@@ -1,0 +1,23 @@
+#!/bin/bash
+
+[ -d frame ] || git clone https://github.com/lelanthran/frame
+[ -d frame ] && {
+    pushd frame
+    git pull
+    popd
+}
+
+pushd frame
+
+if [ ! -d /opt/frame ]; then
+    echo "Needing sudo password please ..."
+    sudo mkdir -u $USER mkdir /opt/frame
+fi
+
+make release INSTALL_PREFIX=/opt/frame TARGET=""
+
+if [ ! -e ~/.bin/frame ]; then
+    ln -s /opt/frame/bin/frame.* ~/.bin/frame
+fi
+
+popd

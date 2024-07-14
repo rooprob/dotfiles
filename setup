@@ -3,19 +3,19 @@
 # author: robf
 #
 
-things="alacritty fonts keyboard llamafile lazyvim scripts second tmux zsh_pure"
+things="alacritty fonts frame keyboard llamafile lazyvim scripts second tmux zsh_pure"
 
 log() {
-	echo "$1"
+    echo "$1"
 }
 
 run_setup() {
-	log "🍺 $1"
-	pushd "$1" || exit
-	./setup
-	popd || exit
+    log "🍺 $1"
+    pushd "$1" || exit
+    ./setup
+    popd || exit
 }
 
 for thing in $things; do
-	run_setup "$thing"
+    run_setup "$thing"
 done
