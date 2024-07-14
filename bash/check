@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for file in .bashrc .profile .bash_logout .bash_aliases; do
+    if [ "$file" -ot "$HOME/$file" ]; then
+        echo "x ~/$file is newer, run snapshot"
+    fi
+done
