@@ -4,44 +4,39 @@
 # description: simple notes creating script
 # date: 2024-04-08
 
-if [ -z "$1" ] || [ -z "$2" ]; then
-	echo "usage: $0 section title_like_this"
-	exit 1
-fi
+TODAY=$(date -I)
+DATETIME=$(date +'%Y-%m-%dT%H:%M:%S%Z')
+HASH=$(date | sha256sum | cut -c 1-8 | tr -d '\n')
 
-section="$1"
-title="$2"
+section="${1:-zet}"
+title="${2:-$HASH}"
+
+echo "section: $section, title: $title"
 
 if [ -z "$SECOND_HOME" ]; then
-	echo "error: you must configure ~/.config/second/home"
-	exit 1
+    echo "error: you must configure ~/.config/second/home"
+    exit 1
 fi
 
 SECTION_DIR=$SECOND_HOME/$section
-
 [ ! -d "$SECTION_DIR" ] && mkdir -p "$SECTION_DIR"
 
-date_today=$(date -I)
-time_now=$(date +'%Y-%m-%dT%H:%M:%S%Z')
 filename=$SECTION_DIR/${title}.md
-
 if [ ! -e "$filename" ]; then
-	cat >"$filename" <<TEMPLATE
+    cat >"$filename" <<TEMPLATE
 ---
 title: $title
-author: robf
+author: $USER
 section: $section
-date: $date_today
+date: $TODAY
 labels:
 
 ---
 # $title
 
 ---
-[comment]: <> ($time_now)
 
 TEMPLATE
-
 fi
 
 GP=$(ps -o ppid= -p $PPID | xargs -n 1 ps -o ppid=,comm= -p)
@@ -49,5 +44,5 @@ GP=$(ps -o ppid= -p $PPID | xargs -n 1 ps -o ppid=,comm= -p)
 # echo $GP
 
 if ! echo "$GP" | grep nvim >/dev/null; then
-	nvim "$filename"
+    nvim "$filename"
 fi
