@@ -6,6 +6,28 @@ vim.keymap.set("n", "<leader>pv", "<cmd>:Neotree position=left<cr>", { desc = "O
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+-- Function to prompt for user input and execute a shell command
+function run_newnote(section)
+	local note = vim.fn.input("Note: ")
+	vim.env.SECTION = section
+	local output = vim.fn.system("nn", note)
+	local path = output:match("%b()") -- Get the content within parentheses
+	local filename = path:sub(2, -2) -- Remove the surrounding parentheses
+
+	if vim.fn.filereadable(filename) == 1 then
+		vim.cmd("edit" .. vim.fn.fnameescape(filename))
+	end
+end
+
+vim.keymap.set("n", "<leader>nm", [[:lua run_newnote("meetings")<CR>]], { desc = "Create meeting new note" })
+vim.keymap.set("n", "<leader>nn", [[:lua run_newnote("zet")<CR>]], { desc = "Create new note" })
+vim.keymap.set(
+	"v",
+	"<leader>nn",
+	"c<C-R>=trim(system('nn',  getreg('\"')))<CR>",
+	{ desc = "Create new note from text" }
+)
+
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")

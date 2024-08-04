@@ -8,10 +8,8 @@ TODAY=$(date -I)
 DATETIME=$(date +'%Y-%m-%dT%H:%M:%S%Z')
 HASH=$(date | sha256sum | cut -c 1-8 | tr -d '\n')
 
-section="${1:-zet}"
-title="${2:-$HASH}"
-
-echo "section: $section, title: $title"
+section="${SECTION:-zet}"
+title="${TITLE:-$HASH}"
 
 if [ -z "$SECOND_HOME" ]; then
     echo "error: you must configure ~/.config/second/home"
@@ -22,6 +20,10 @@ SECTION_DIR=$SECOND_HOME/$section
 [ ! -d "$SECTION_DIR" ] && mkdir -p "$SECTION_DIR"
 
 filename=$SECTION_DIR/${title}.md
+echo "[$title]($filename)"
+
+INPUT=${@:-$(cat -)}
+
 if [ ! -e "$filename" ]; then
     cat >"$filename" <<TEMPLATE
 ---
@@ -33,6 +35,8 @@ labels:
 
 ---
 # $title
+
+$INPUT
 
 ---
 
