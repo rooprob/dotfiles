@@ -6,7 +6,8 @@
 
 TODAY=$(date -I)
 DATETIME=$(date +'%Y-%m-%dT%H:%M:%S%Z')
-HASH=$(date | sha256sum | cut -c 1-8 | tr -d '\n')
+INPUT=${@:-$(cat -)}
+HASH=$(echo $INPUT | sha256sum | cut -c 1-8 | tr -d '\n')
 
 section="${SECTION:-zet}"
 title="${TITLE:-$HASH}"
@@ -22,8 +23,6 @@ SECTION_DIR=$SECOND_HOME/$section
 filename=$SECTION_DIR/${title}.md
 echo "[$title]($filename)"
 
-INPUT=${@:-$(cat -)}
-
 if [ ! -e "$filename" ]; then
     cat >"$filename" <<TEMPLATE
 ---
@@ -37,8 +36,6 @@ labels:
 # $title
 
 $INPUT
-
----
 
 TEMPLATE
 fi
