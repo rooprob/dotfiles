@@ -6,11 +6,35 @@
 
 TODAY=$(date -I)
 DATETIME=$(date +'%Y-%m-%dT%H:%M:%S%Z')
-INPUT=${@:-$(cat -)}
-HASH=$(echo $INPUT | sha256sum | cut -c 1-8 | tr -d '\n')
 
-section="${SECTION:-zet}"
-title="${TITLE:-$HASH}"
+generate_random_arg() {
+    echo $(date +%s | sha256sum | base64 | head -c 8)
+}
+
+# Determine how many arguments were provided
+INPUT=
+if [ $# -eq 2 ]; then
+    section=$1
+    title=$2
+elif [ $# -eq 1 ]; then
+    section=$1
+    title=$(generate_random_arg)
+elif [ $# -eq 0 ]; then
+    # Check if stdin is available
+    if [ -t 0 ]; then
+        # No stdin, generate two arguments
+        section="zet"
+        title=$(generate_random_arg)
+    else
+        section="zet"
+        title=$(generate_random_arg)
+        INPUT=$(cat -)
+        title=$(echo $INPUT | sha256sum | cut -c 1-8 | tr -d '\n')
+    fi
+else
+    echo "Invalid number of arguments provided."
+    exit 1
+fi
 
 if [ -z "$SECOND_HOME" ]; then
     echo "error: you must configure ~/.config/second/home"
@@ -31,8 +55,15 @@ if [ "$section" != "day" ]; then
 fi
 
 filename=$NN_SECTION_DIR/${title}.md
+
+#
+# capture this output for vim external command
+#
 echo "[$title]($filename)"
 
+#
+# Create a new zettelcasten note
+#
 if [ ! -e "$filename" ]; then
     cat >"$filename" <<TEMPLATE
 ---
@@ -50,6 +81,9 @@ $INPUT
 TEMPLATE
 fi
 
+#
+# Create a diary note
+#
 if [ ! -z "$DAY_FILENAME" ]; then
     if [ ! -e "$DAY_FILENAME" ]; then
         cat >"$DAY_FILENAME" <<TEMPLATE
@@ -72,10 +106,10 @@ TEMPLATE
 
 fi
 
+# Local processing
+# If we've been called from a shell, open vim
 GP=$(ps -o ppid= -p $PPID | xargs -n 1 ps -o ppid=,comm= -p)
-
 # echo $GP
-
 if ! echo "$GP" | grep nvim >/dev/null; then
     nvim "$filename"
 fi
