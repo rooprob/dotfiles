@@ -13,7 +13,7 @@ generate_random_arg() {
 
 safe_filename() {
     filename=$@
-    echo -n $filename | tr -sc '[:alpha:]\.' '-' | tr '[:upper:]' '[:lower:]'
+    echo -n $filename | tr -sc '[:alpha:]\.' '-' | tr '[:upper:]' '[:lower:]' | tr -d '\.$'
 }
 
 # Determine how many arguments were provided
@@ -21,12 +21,15 @@ INPUT=
 if [ $# -eq 2 ]; then
     section=$1
     title=$2
+    if [ "$title" = "" ]; then
+        title=$(generate_random_arg)
+    fi
 elif [ $# -eq 1 ]; then
     section=$1
     # title=$(generate_random_arg)
     echo -n "enter new title: "
     read title
-    if [ -z "$title" ]; then
+    if [ "$title" = "" ]; then
         title=$(generate_random_arg)
     fi
 elif [ $# -eq 0 ]; then
@@ -37,13 +40,13 @@ elif [ $# -eq 0 ]; then
         # title=$(generate_random_arg)
         echo -n "enter new title: "
         read title
-        if [ -z "$title" ]; then
+        if [ "$title" = "" ]; then
             title=$(generate_random_arg)
         fi
     else
         section="zet"
         INPUT=$(cat -)
-        title=$(echo $INPUT | head -n1)
+        title=$(echo -en "$INPUT" | head -n 1)
     fi
 else
     echo "Invalid number of arguments provided."
