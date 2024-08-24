@@ -11,6 +11,11 @@ generate_random_arg() {
     echo $(date +%s | sha256sum | base64 | head -c 8)
 }
 
+safe_filename() {
+    filename=$@
+    echo -n $filename | tr -sc '[:alpha:]\.' '-' | tr '[:upper:]' '[:lower:]'
+}
+
 # Determine how many arguments were provided
 INPUT=
 if [ $# -eq 2 ]; then
@@ -18,18 +23,27 @@ if [ $# -eq 2 ]; then
     title=$2
 elif [ $# -eq 1 ]; then
     section=$1
-    title=$(generate_random_arg)
+    # title=$(generate_random_arg)
+    echo -n "enter new title: "
+    read title
+    if [ -z "$title" ]; then
+        title=$(generate_random_arg)
+    fi
 elif [ $# -eq 0 ]; then
     # Check if stdin is available
     if [ -t 0 ]; then
         # No stdin, generate two arguments
         section="zet"
-        title=$(generate_random_arg)
+        # title=$(generate_random_arg)
+        echo -n "enter new title: "
+        read title
+        if [ -z "$title" ]; then
+            title=$(generate_random_arg)
+        fi
     else
         section="zet"
-        title=$(generate_random_arg)
         INPUT=$(cat -)
-        title=$(echo $INPUT | sha256sum | cut -c 1-8 | tr -d '\n')
+        title=$(echo $INPUT | head -n1)
     fi
 else
     echo "Invalid number of arguments provided."
@@ -54,7 +68,8 @@ if [ "$section" != "day" ]; then
     [ ! -d "$DAY_SECTION_DIR" ] && mkdir -p "$DAY_SECTION_DIR"
 fi
 
-filename=$NN_SECTION_DIR/${title}.md
+stitle=$(safe_filename "$title")
+filename=$NN_SECTION_DIR/${stitle}.md
 
 #
 # capture this output for vim external command
