@@ -45,6 +45,7 @@ fi
 if [ -d "$HOME/perl5/bin" ]; then
     PATH="$HOME/perl5/bin:$PATH"
 fi
+export PERL5LIB=$HOME/perl5/lib/perl5
 
 frame_ps1() {
     frame current --quiet | cut -f 1 -d :

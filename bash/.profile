@@ -42,6 +42,12 @@ if [ -d "/opt/frame/bin" ]; then
     PATH="/opt/frame/bin:$PATH"
 fi
 
+# set PATH so it includes user's private perl bin if it exists
+if [ -d "$HOME/perl5/bin" ]; then
+    PATH="$HOME/perl5/bin:$PATH"
+fi
+export PERL5LIB=$HOME/perl5/lib/perl5
+
 export EDITOR=nvim
 
 export PYENV_ROOT="$HOME/.pyenv"
