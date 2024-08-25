@@ -3,7 +3,7 @@
 # author: robf
 #
 
-things="alacritty fonts frame keyboard llamafile lazyvim scripts second tmux zsh_pure"
+things="alacritty bash fonts frame i3status keyboard llamafile lazyvim scripts second starship sway tmux"
 
 log() {
     echo "$1"

@@ -1,0 +1,31 @@
+general {
+    output_format = "i3bar"
+}
+
+order += "disk /"
+order += "disk /home"
+order += "wireless wlp114s0"
+order += "ethernet eth0"
+order += "battery 0"
+order += "memory"
+order += "load"
+order += "tztime local"
+
+wireless wlp114s0 {
+    format_up = "W: (%quality at %essid, %bitrate) %ip"
+    format_down = "W: down"
+}
+ethernet eth0 {
+    format_up = "E: %ip (%speed)"
+    format_down = "W: down"
+}
+battery 0 {
+    format = "%status %percentage %remaining %emptytime"
+    format_down = "No battery"
+    status_chr = "⚡ CHR"
+    status_bat = "🔋 BAT"
+    status_unk = "? UNK"
+    status_full = "☻ FULL"
+    path = "/sys/class/power_supply/BAT%d/uevent"
+    low_threshold = 10
+}
