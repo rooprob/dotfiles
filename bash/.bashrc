@@ -41,6 +41,11 @@ if [ -d "/opt/frame/bin" ]; then
     PATH="/opt/frame/bin:$PATH"
 fi
 
+# set PATH so it includes user's private perl bin if it exists
+if [ -d "$HOME/perl5/bin" ]; then
+    PATH="$HOME/perl5/bin:$PATH"
+fi
+
 frame_ps1() {
     frame current --quiet | cut -f 1 -d :
 }
@@ -52,8 +57,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=100000
+HISTFILESIZE=20000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -108,6 +113,12 @@ xterm* | rxvt*)
 esac
 
 export EDITOR=nvim
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
