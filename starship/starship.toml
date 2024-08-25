@@ -1,0 +1,29 @@
+[character]
+format = '[▶](#ff761a) '
+
+[git_branch]
+symbol = '🌱 '
+truncation_length = 4
+truncation_symbol = ''
+ignore_branches = ['master', 'main']
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+#conflicted = '🏳'
+ahead = '*'
+behind = '*'
+diverged = '😵'
+up_to_date = '✓'
+untracked = '🤷'
+stashed = '📦'
+modified = '*'
+#staged = '[++\($count\)](green)'
+#renamed = '👅'
+#deleted = '🗑'
+
+# [frame]
+# format = 'on [$symbol($profile )(\($region\) )]($style)'
+# style = 'bold blue'
+# symbol = '🖽 '
+#
+# current
