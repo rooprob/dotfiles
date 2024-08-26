@@ -62,6 +62,11 @@ fi
 NN_SECTION_DIR=$SECOND_HOME/$section
 [ ! -d "$NN_SECTION_DIR" ] && mkdir -p "$NN_SECTION_DIR"
 
+# is this re-opening a note
+if [ -e "$SECOND_HOME/$section/$title" ]; then
+    exec nvim "$SECOND_HOME/$section/$title"
+fi
+
 # create or update a new day note
 DAY_FILENAME=
 DAY_SECTION_DIR=
