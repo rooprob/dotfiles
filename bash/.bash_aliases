@@ -6,14 +6,21 @@ alias c=clear
 alias e=exit
 alias t=tmux
 alias s=sudo
-alias k=kubctl
-alias kgp="kubectl get pods"
+
+alias k="kubectl"
+alias kg="kubectl get"
+alias kgp="kubectl get pod"
+alias kgwf="kubectl get --watch- f"
+
+alias ksg="kubectl --namespace=kube-system get"
+alias ksgp="kubectl --namespace=kube-system get pod"
+
 alias kc="kubectx"
 alias kn="kubens"
 
-alias gp=git pull
-alias gs=git status
-alias lg=lazygit
+alias gp="git pull"
+alias gs="git status"
+alias lg="lazygit"
 
 alias ls="ls --color=auto"
 alias la="ls -lathr"
