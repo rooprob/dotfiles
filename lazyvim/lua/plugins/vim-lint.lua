@@ -1,5 +1,5 @@
 return {
-	"mfussenegger/vim-lint",
+	"mfussenegger/nvim-lint",
 	optional = true,
 	opts = {
 		linters = {
