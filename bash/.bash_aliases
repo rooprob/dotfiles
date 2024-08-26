@@ -15,8 +15,8 @@ alias kgwf="kubectl get --watch- f"
 alias ksg="kubectl --namespace=kube-system get"
 alias ksgp="kubectl --namespace=kube-system get pod"
 
-alias kc="kubectx"
-alias kn="kubens"
+alias kctx="kubectx"
+alias kns="kubens"
 
 alias gp="git pull"
 alias gs="git status"
