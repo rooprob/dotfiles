@@ -13,7 +13,7 @@ generate_random_arg() {
 
 safe_filename() {
     filename=$@
-    echo -n $filename | tr -sc '[:alpha:]\.' '-' | tr '[:upper:]' '[:lower:]' | tr -d '\.$'
+    echo -n $filename | tr -sc '[:alnum:]\.' '-' | tr '[:upper:]' '[:lower:]' | tr -d '\.$'
 }
 
 # Determine how many arguments were provided
