@@ -1,29 +1,29 @@
-__nn_completion()
-{
-    local cur prev opts
-    COMPREPLY=()
+# vim: set ft=sh:
 
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
+__nn_completion() {
+	local cur prev opts
+	COMPREPLY=()
 
-    opts="<section> <title>"
+	cur="${COMP_WORDS[COMP_CWORD]}"
+	prev="${COMP_WORDS[COMP_CWORD - 1]}"
 
-    case ${COMP_CWORD} in
-        1)
-            # base-leve completion: show sections
-            COMPREPLY=($(compgen -W "$(ls -1 $SECOND_HOME)" -- ${cur}))
-            ;;
-        2)
-            # inner completion
-            COMPREPLY=($(ls -1 $SECOND_HOME/${prev}/${cur}* | tr '\n' '\0' | xargs -0 -n 1 basename))
+	opts="<section> <title>"
 
-            ;;
-        *)
-            COMPREPLY=()
-            ;;
-        esac
+	case ${COMP_CWORD} in
+	1)
+		# base-leve completion: show sections
+		COMPREPLY=($(compgen -W "$(ls -1 $SECOND_HOME)" -- ${cur}))
+		;;
+	2)
+		# inner completion
+		COMPREPLY=($(ls -1 $SECOND_HOME/${prev}/${cur}* | tr '\n' '\0' | xargs -0 -n 1 basename))
+
+		;;
+	*)
+		COMPREPLY=()
+		;;
+	esac
 }
-
 
 # `foo` <tab> <tab> would show autocomplete above wordlist
 complete -F __nn_completion nn

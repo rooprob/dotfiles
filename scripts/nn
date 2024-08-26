@@ -2,60 +2,61 @@
 # vim: set filetype=sh :
 # author: robf
 # description: simple notes creating script
-# date: 2024-04-08
+# date: 2024-08-27
 
 TODAY=$(date -I)
 DATETIME=$(date +'%Y-%m-%dT%H:%M:%S%Z')
 
 generate_random_arg() {
-    echo $(date +%s | sha256sum | base64 | head -c 8)
+	echo $(date +%s | sha256sum | base64 | head -c 8)
 }
 
 safe_filename() {
-    filename=$@
-    echo -n $filename | tr -sc '[:alnum:]\.' '-' | tr '[:upper:]' '[:lower:]' | tr -d '\.$'
+	filename=$@
+	echo -n $filename | tr -sc '[:alnum:]\.' '-' | tr '[:upper:]' '[:lower:]' | tr -d '\.$'
 }
 
 # Determine how many arguments were provided
 INPUT=
 if [ $# -eq 2 ]; then
-    section=$1
-    title=$2
-    if [ "$title" = "" ]; then
-        title=$(generate_random_arg)
-    fi
+	section=$1
+	title=$2
+	if [ "$title" = "" ]; then
+		title=$(generate_random_arg)
+	fi
+
 elif [ $# -eq 1 ]; then
-    section=$1
-    # title=$(generate_random_arg)
-    echo -n "enter new title: "
-    read title
-    if [ "$title" = "" ]; then
-        title=$(generate_random_arg)
-    fi
+	section=$1
+	# title=$(generate_random_arg)
+	echo -n "enter new title: "
+	read title
+	if [ "$title" = "" ]; then
+		title=$(generate_random_arg)
+	fi
 elif [ $# -eq 0 ]; then
-    # Check if stdin is available
-    if [ -t 0 ]; then
-        # No stdin, generate two arguments
-        section="zet"
-        # title=$(generate_random_arg)
-        echo -n "enter new title: "
-        read title
-        if [ "$title" = "" ]; then
-            title=$(generate_random_arg)
-        fi
-    else
-        section="zet"
-        INPUT=$(cat -)
-        title=$(echo -en "$INPUT" | head -n 1)
-    fi
+	# Check if stdin is available
+	if [ -t 0 ]; then
+		# No stdin, generate two arguments
+		section="zet"
+		# title=$(generate_random_arg)
+		echo -n "enter new title: "
+		read title
+		if [ "$title" = "" ]; then
+			title=$(generate_random_arg)
+		fi
+	else
+		section="zet"
+		INPUT=$(cat -)
+		title=$(echo -en "$INPUT" | head -n 1)
+	fi
 else
-    echo "Invalid number of arguments provided."
-    exit 1
+	echo "Invalid number of arguments provided."
+	exit 1
 fi
 
 if [ -z "$SECOND_HOME" ]; then
-    echo "error: you must configure ~/.config/second/home"
-    exit 1
+	echo "error: you must configure ~/.config/second/home"
+	exit 1
 fi
 
 # create a new note
@@ -64,16 +65,16 @@ NN_SECTION_DIR=$SECOND_HOME/$section
 
 # is this re-opening a note
 if [ -e "$SECOND_HOME/$section/$title" ]; then
-    exec nvim "$SECOND_HOME/$section/$title"
+	exec nvim "$SECOND_HOME/$section/$title"
 fi
 
 # create or update a new day note
 DAY_FILENAME=
 DAY_SECTION_DIR=
 if [ "$section" != "day" ]; then
-    DAY_SECTION_DIR=$SECOND_HOME/day
-    DAY_FILENAME=$DAY_SECTION_DIR/${TODAY}.md
-    [ ! -d "$DAY_SECTION_DIR" ] && mkdir -p "$DAY_SECTION_DIR"
+	DAY_SECTION_DIR=$SECOND_HOME/day
+	DAY_FILENAME=$DAY_SECTION_DIR/${TODAY}.md
+	[ ! -d "$DAY_SECTION_DIR" ] && mkdir -p "$DAY_SECTION_DIR"
 fi
 
 stitle=$(safe_filename "$title")
@@ -88,7 +89,7 @@ echo "[$title]($filename)"
 # Create a new zettelcasten note
 #
 if [ ! -e "$filename" ]; then
-    cat >"$filename" <<TEMPLATE
+	cat >"$filename" <<TEMPLATE
 ---
 title: $title
 author: $USER
@@ -108,8 +109,8 @@ fi
 # Create a diary note
 #
 if [ ! -z "$DAY_FILENAME" ]; then
-    if [ ! -e "$DAY_FILENAME" ]; then
-        cat >"$DAY_FILENAME" <<TEMPLATE
+	if [ ! -e "$DAY_FILENAME" ]; then
+		cat >"$DAY_FILENAME" <<TEMPLATE
 ---
 title: $TODAY
 author: $USER
@@ -121,9 +122,9 @@ labels:
 
 TEMPLATE
 
-    fi
-    # append the new note to the current day
-    cat >>"$DAY_FILENAME" <<TEMPLATE
+	fi
+	# append the new note to the current day
+	cat >>"$DAY_FILENAME" <<TEMPLATE
 [$title]($filename)
 TEMPLATE
 
@@ -134,5 +135,5 @@ fi
 GP=$(ps -o ppid= -p $PPID | xargs -n 1 ps -o ppid=,comm= -p)
 # echo $GP
 if ! echo "$GP" | grep nvim >/dev/null; then
-    nvim "$filename"
+	nvim "$filename"
 fi

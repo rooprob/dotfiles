@@ -1,0 +1,23 @@
+#!/bin/bash
+
+subcommand=$1
+
+if ! [ -z "$*" ]; then
+	# Discard subcommand from arg string
+	shift
+fi
+
+if [ "$subcommand" = "epoch" ]; then
+	# Convert epoch to date
+	date -d @"$*" "+%a %b %e %T %Z %Y"
+	# mac: date -r "$*"
+elif [ "$subcommand" = "date" ]; then
+	# Convert date to epoch
+	date -d "$*" +%s
+	# mac: date -j -f "%a %b %e %T %Z %Y" "$*" +"%s"
+else
+	echo "Usage: tsconvert <command> <arg>"
+	echo "Commands available:"
+	echo "\\tdate <epoch string>"
+	echo "\\tepoch <timestamp>"
+fi
