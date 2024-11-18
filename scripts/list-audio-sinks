@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pactl -f json list sinks  | jq -r  '.[] | .index as $index | .name as $name | .ports[] | .name as $port_name  | .type as $port_type | [$index, $name, $port_name, $port_type ] | @tsv'

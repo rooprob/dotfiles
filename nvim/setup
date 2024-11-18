@@ -1,31 +1,19 @@
 #!/bin/bash
 # set -x
 
-echo "see lazyvim/setup now!"
-exit 1
-
 if [ ! -z "$INSTALL_NVIM" ]; then
-	curl -LO -z nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-	chksum=$(md5sum nvim-linux64.tar.gz | cut -f1 -d\ )
-	if [ ! -e "nvim.chk" ]; then
-		echo $chksum >nvim.chk
-	fi
-	previous_chksum=$(<nvim.chk)
-	if [ "$chksum" != "$previous_chksum" ]; then
-		echo "Needing sudo password please ..."
-		sudo rm -fr /opt/nvim
-		sudo tar -C /opt -xzf nvim-linux64.tar.gz
-		echo $chksum >nvim.chk
-	fi
-
-	if [ -d "$HOME/.local/share/nvim" ]; then
-		rm -fr "$HOME/.local/share/nvim"
-	fi
-	if [ -d "$HOME/.config/nvim" ]; then
-		rm -fr "$HOME/.config/nvim"
-	fi
+    curl -LO -z nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+    chksum=$(md5sum nvim-linux64.tar.gz | cut -f1 -d\ )
+    if [ ! -e "nvim.chk" ]; then
+        echo $chksum >nvim.chk
+    fi
+    previous_chksum=$(<nvim.chk)
+    if [ "$chksum" != "$previous_chksum" ]; then
+        echo "Needing sudo password please ..."
+        sudo rm -fr /opt/nvim-linux64
+        sudo tar -C /opt -xzf nvim-linux64.tar.gz
+        echo $chksum >nvim.chk
+    fi
 fi
 
 [ -d ~/.config/nvim ] || mkdir ~/.config/nvim
-rsync -av init.lua ~/.config/nvim/init.lua
-rsync -av lua/ ~/.config/nvim/lua/
