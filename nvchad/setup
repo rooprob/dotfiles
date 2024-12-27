@@ -26,4 +26,5 @@ if [ ! -d ~/.config/nvim ]; then
     mkdir ~/.config/nvim
 fi
 echo "info: adding our lua scripts..."
+rsync -av init.lua ~/.config/nvim/
 rsync -av lua/ ~/.config/nvim/lua/
