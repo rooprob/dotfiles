@@ -97,22 +97,23 @@ vim.keymap.set("n", "<leader><leader>", function()
 	vim.cmd("so")
 end)
 
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "Project files" })
-vim.keymap.set("n", "<leader>pt", builtin.git_files, { desc = "Search git files" })
-
-vim.keymap.set("n", "<leader>pg", function()
-	local word = vim.fn.expand("<cword>")
-	builtin.grep_string({ search = word })
-end, { desc = "Project word search" })
-
-vim.keymap.set("n", "<leader>pG", function()
-	local word = vim.fn.expand("<cWORD>")
-	builtin.grep_string({ search = word })
-end, { desc = "Project WORD search" })
-
-vim.keymap.set("n", "<leader>ph", builtin.help_tags, { desc = "Project help" })
-vim.keymap.set("n", "<leader>pb", builtin.buffers, { desc = "Project buffers" })
+-- 27/12/24 Geting error from telescope builtin does not exist
+-- local builtin = require("telescope.builtin")
+-- vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "Project files" })
+-- vim.keymap.set("n", "<leader>pt", builtin.git_files, { desc = "Search git files" })
+--
+-- vim.keymap.set("n", "<leader>pg", function()
+-- 	local word = vim.fn.expand("<cword>")
+-- 	builtin.grep_string({ search = word })
+-- end, { desc = "Project word search" })
+--
+-- vim.keymap.set("n", "<leader>pG", function()
+-- 	local word = vim.fn.expand("<cWORD>")
+-- 	builtin.grep_string({ search = word })
+-- end, { desc = "Project WORD search" })
+--
+-- vim.keymap.set("n", "<leader>ph", builtin.help_tags, { desc = "Project help" })
+-- vim.keymap.set("n", "<leader>pb", builtin.buffers, { desc = "Project buffers" })
 
 -- https://www.reddit.com/r/neovim/comments/10wru1c/how_do_i_resize_windows/
 vim.keymap.set("n", "=", "<cmd>vertical resize +5<cr>") -- make the window biger vertically
