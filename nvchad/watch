@@ -1,0 +1,1 @@
+inotifywait -e close_write,moved_to,create -m -r . | while read directory events filename; do echo $filename; ./setup ; done;

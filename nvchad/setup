@@ -1,0 +1,29 @@
+#!/bin/bash
+# set -x
+OPTSTRING=":X"
+
+NUKE_NVCHAD=${NUKE_NVCHAD:-}
+
+while getopts ${OPTSTRING} opt; do
+    case ${opt} in
+    X)
+        NUKE_NVCHAD=1
+        ;;
+    esac
+done
+
+if [ ! -z "$NUKE_NVCHAD" ]; then
+    echo "info: nuking old config..."
+    if [ -d "$HOME/.local/share/nvim" ]; then
+        rm -fr "$HOME/.local/share/nvim"
+    fi
+    if [ -d "$HOME/.config/nvim" ]; then
+        rm -fr "$HOME/.config/nvim"
+    fi
+fi
+
+if [ ! -d ~/.config/nvim ]; then
+    mkdir ~/.config/nvim
+fi
+echo "info: adding our lua scripts..."
+rsync -av lua/ ~/.config/nvim/lua/
