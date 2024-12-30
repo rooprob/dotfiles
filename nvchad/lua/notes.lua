@@ -1,5 +1,5 @@
 -- Function to prompt for user input and execute a shell command
-function Newnote(section)
+function NewNote(section)
 	local note = vim.fn.input("Note " .. section)
 	vim.env.SECTION = section
 	local output = vim.fn.system("nn", note)
@@ -29,9 +29,9 @@ function NewNoteFromSelection(section)
 	end
 end
 
-vim.keymap.set("n", "<leader>nm", [[:lua NewNewnote("meetings")<CR>]], { desc = "Create meeting new note" })
-vim.keymap.set("n", "<leader>nn", [[:lua NewNoteFromSection("zet")<CR>]], { desc = "Create new note" })
-vim.keymap.set("v", "<leader>nn", [[c<esc>:lua note_from_selection('zet')<cr>]], { desc = "Create new note from text" })
+vim.keymap.set("n", "<leader>nm", [[:lua NewNote("meetings")<CR>]], { desc = "Create meeting new note" })
+vim.keymap.set("n", "<leader>nn", [[:lua NewNote("zet")<CR>]], { desc = "Create new note" })
+vim.keymap.set("v", "<leader>nn", [[<esc>:lua NewNoteFromSelection('zet')<CR>]], { desc = "Create new note from text" })
 -- vim.keymap.set(
 --     "v",
 --     "<leader>nn",
