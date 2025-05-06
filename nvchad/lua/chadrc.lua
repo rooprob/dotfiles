@@ -26,9 +26,12 @@ local options = {
 			abbr_maxwidth = 60,
 			-- for tailwind, css lsp etc
 			format_colors = { lsp = true, icon = "󱓻" },
-		},
+      },
 
-		telescope = { style = "borderless" }, -- borderless / bordered
+    telescope = { 
+      enabled = false. 
+        style = "borderless" 
+    }, 
 
 		statusline = {
 			enabled = true,
@@ -50,7 +53,7 @@ local options = {
 		},
 	},
 	nvdash = {
-		load_on_startup = true,
+		load_on_startup = false,
 
 		header = {
 			"                            ",

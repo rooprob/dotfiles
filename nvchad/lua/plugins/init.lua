@@ -38,7 +38,7 @@ return {
 	"nvzone/menu",
 	{
 		"stevearc/conform.nvim",
-		event = "BufWritePre", -- uncomment for format on save
+		event = "BufWritePre",
 		opts = require("configs.conform"),
 	},
 
@@ -66,9 +66,15 @@ return {
 			},
 		},
 
+		{
+			"nvim-telescope/telescope.vim",
+			enabled = false,
+		},
+		-- Provides selector with vim keys navigation
+		{
+			"ibhagwan/fzf-lua",
+		},
 		-- Provides keyboard navigation integration with tmux
-		-- FIXME: requires manual :TmuxNavigateDown first
-		-- even with lazy=false
 		{
 			"christoomey/vim-tmux-navigator",
 			cmd = {
