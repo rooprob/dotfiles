@@ -3,7 +3,6 @@
 -- Please read that file to know all available options :(
 
 local options = {
-
 	base46 = {
 		theme = "falcon",
 		hl_add = {},
@@ -12,27 +11,23 @@ local options = {
 		changed_themes = {},
 		transparency = false,
 		theme_toggle = { "onedark", "one_light" },
-
-		-- hl_override = {
-		-- 	Comment = { italic = true },
-		-- 	["@comment"] = { italic = true },
-		-- },
 	},
 
 	ui = {
+		-- completion plugin
+		-- https://github.com/hrsh7th/nvim-cmp
 		cmp = {
 			icons_left = false, -- only for non-atom styles!
 			style = "default", -- default/flat_light/flat_dark/atom/atom_colored
 			abbr_maxwidth = 60,
-			-- for tailwind, css lsp etc
 			format_colors = { lsp = true, icon = "󱓻" },
-      },
+		},
 
-    telescope = { 
-      enabled = false. 
-        style = "borderless" 
-    }, 
+		telescope = {
+			enabled = false,
+		},
 
+		-- display vim status line
 		statusline = {
 			enabled = true,
 			theme = "default", -- default/vscode/vscode_colored/minimal

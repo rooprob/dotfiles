@@ -1,48 +1,19 @@
--- Provides the following
---
--- Plenary is a lua module for asynchronous programming using coroutines. The library is build on native lua coroutines and libuv.
--- Telescope provides fuzzy finder over lists.
--- <leader>ff  find files
--- <leader>fw  find word in a live grep
--- <leader>fb  find buffer
--- <leader>fh  find help
--- <leader>ma  find marks
--- <leader>cm  git commits
--- <leader>gt  git status
--- NvTree provides file management, picker etc.
--- <leader>e to open with focus NvimTreeFocus
--- C-n to NvTreeToggle-
--- CellularAutomaton provides a fun visualization
--- make_it_rain, game_of_life, scramble
--- WhichKey provides a helpful reminder for your mappings.
--- :checkhealth which-key
--- <leader>wK
--- <leader>wk
---
 return {
 	{ "nvim-lua/plenary.nvim" },
 	{
-		"nvchad/base46",
-		lazy = true,
-		build = function()
-			require("base46").load_all_highlights()
+		"hrsh7th/nvim-cmp",
+		opts = function()
+			local config = require("nvchad.configs.cmp")
+			config.mapping["<CR>"] = nil
+			return config
 		end,
 	},
-	{
-		"nvchad/ui",
-		config = function()
-			require("nvchad")
-		end,
-	},
-	"nvzone/volt",
-	"nvzone/menu",
 	{
 		"stevearc/conform.nvim",
 		event = "BufWritePre",
 		opts = require("configs.conform"),
 	},
 
-	-- These are some examples, uncomment them if you want to see them work!
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
@@ -61,6 +32,7 @@ return {
 				"json",
 				"html",
 				"lua",
+				"python",
 				"vim",
 				"vimdoc",
 			},
@@ -77,18 +49,12 @@ return {
 		-- Provides keyboard navigation integration with tmux
 		{
 			"christoomey/vim-tmux-navigator",
+			lazy = false,
 			cmd = {
 				"TmuxNavigateLeft",
 				"TmuxNavigateRight",
 				"TmuxNavigateUp",
 				"TmuxNavigateDown",
-			},
-			keys = {
-				{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-				{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-				{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-				{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-				{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 			},
 		},
 
