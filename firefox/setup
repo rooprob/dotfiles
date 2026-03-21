@@ -1,0 +1,82 @@
+#!/bin/bash
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+if [ "$(uname -s)" = "Darwin" ]; then
+    FIREFOX_DIR="$HOME/Library/Application Support/Firefox"
+else
+    FIREFOX_DIR="$HOME/.mozilla/firefox"
+fi
+
+PROFILES_INI="$FIREFOX_DIR/profiles.ini"
+
+if [ ! -f "$PROFILES_INI" ]; then
+    echo "info: firefox profiles.ini not found at $PROFILES_INI (skip)"
+    exit 0
+fi
+
+DEFAULT_PATH="$(
+    awk -F= '
+      BEGIN { section=""; path=""; is_default=0 }
+      /^\[/ {
+        if (section ~ /^\[Install/ && install_default != "") {
+          print install_default
+          exit
+        }
+        if (section ~ /^\[Profile/ && is_default == 1 && path != "") {
+          profile_default = path
+        }
+        section=$0
+        path=""
+        is_default=0
+        next
+      }
+      section ~ /^\[Install/ && $1=="Default" { install_default=$2 }
+      section ~ /^\[Profile/ && $1=="Path" { path=$2 }
+      section ~ /^\[Profile/ && $1=="Default" && $2=="1" { is_default=1 }
+      END {
+        if (install_default != "") {
+          print install_default
+        } else if (is_default == 1 && path != "") {
+          print path
+        } else if (profile_default != "") {
+          print profile_default
+        }
+      }
+    ' "$PROFILES_INI"
+)"
+
+if [ -z "$DEFAULT_PATH" ]; then
+    echo "error: could not determine default Firefox profile from $PROFILES_INI"
+    exit 1
+fi
+
+if [ "${DEFAULT_PATH#/}" != "$DEFAULT_PATH" ]; then
+    PROFILE_DIR="$DEFAULT_PATH"
+else
+    PROFILE_DIR="$FIREFOX_DIR/$DEFAULT_PATH"
+fi
+
+if [ ! -d "$PROFILE_DIR" ]; then
+    echo "error: profile directory does not exist: $PROFILE_DIR"
+    exit 1
+fi
+
+mkdir -p "$PROFILE_DIR/chrome"
+cp "$SCRIPT_DIR/chrome/userChrome.css" "$PROFILE_DIR/chrome/userChrome.css"
+cp "$SCRIPT_DIR/chrome/userContent.css" "$PROFILE_DIR/chrome/userContent.css"
+
+USER_JS="$PROFILE_DIR/user.js"
+PREF='user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);'
+
+if [ -f "$USER_JS" ]; then
+    if ! grep -Fq "$PREF" "$USER_JS"; then
+        printf "\n%s\n" "$PREF" >>"$USER_JS"
+    fi
+else
+    printf "%s\n" "$PREF" >"$USER_JS"
+fi
+
+echo "info: installed Firefox theme into $PROFILE_DIR/chrome"
+echo "info: restart Firefox to apply userChrome/userContent styles"

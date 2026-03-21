@@ -1,29 +1,69 @@
+palette = "dracowl"
+format = "$hostname$directory$git_branch$git_status$status$cmd_duration$line_break$character"
+add_newline = false
+scan_timeout = 30
+command_timeout = 400
+
+[palettes.dracowl]
+bg = "#030c1b"
+bg_alt = "#000815"
+fg = "#cccccc"
+muted = "#7f848e"
+lilac = "#a179fb"
+blue = "#4d91fb"
+cyan = "#9cdcfe"
+green = "#66ffb4"
+yellow = "#fbe179"
+pink = "#fc60a1"
+red = "#fb5474"
+
+[directory]
+style = "fg:cyan"
+format = "[$path]($style) "
+truncation_length = 4
+truncate_to_repo = false
+read_only = " [ro]"
+read_only_style = "fg:red"
+
+[hostname]
+ssh_only = true
+style = "fg:green"
+format = "[$hostname]($style) "
+
 [character]
-format = '[▶](#ff761a) '
+success_symbol = "[❯](fg:lilac)"
+error_symbol = "[❯](fg:red)"
+vicmd_symbol = "[❮](fg:yellow)"
+format = "$symbol "
 
 [git_branch]
-symbol = '🌱 '
+symbol = " "
+style = "fg:blue"
+format = "[$symbol$branch]($style) "
 truncation_length = 4
-truncation_symbol = ''
-ignore_branches = ['master', 'main']
+truncation_symbol = ""
+ignore_branches = ["master", "main"]
 
 [git_status]
-format = '([$all_status$ahead_behind]($style) )'
-#conflicted = '🏳'
-ahead = '*'
-behind = '*'
-diverged = '😵'
-up_to_date = '✓'
-untracked = '🤷'
-stashed = '📦'
-modified = '*'
-#staged = '[++\($count\)](green)'
-#renamed = '👅'
-#deleted = '🗑'
+style = "fg:pink"
+format = "([$all_status$ahead_behind]($style) )"
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+up_to_date = "✓"
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "x"
 
-# [frame]
-# format = 'on [$symbol($profile )(\($region\) )]($style)'
-# style = 'bold blue'
-# symbol = '🖽 '
-#
-# current
+[status]
+disabled = false
+style = "fg:red"
+symbol = "✖"
+format = "[$symbol$status]($style) "
+
+[cmd_duration]
+min_time = 1000
+format = "[took ${duration}](fg:muted) "

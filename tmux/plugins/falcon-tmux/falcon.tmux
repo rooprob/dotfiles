@@ -41,22 +41,22 @@ main() {
 
   # TODO https://github.com/fenetikm/falcon/blob/master/lua/falcon.lua
  
-  # thm_bg="#010220"
-  thm_bg="#1e1e2e"
-  thm_fg="#b4b4b0"
-  thm_white="#f8f8ff"
+  # DracOwl-inspired palette: deep blue surfaces + lilac/cyan/pink accents.
+  thm_bg="#030c1b"
+  thm_fg="#cccccc"
+  thm_white="#ffffff"
 
-  thm_cyan="#8bccbf"
-  thm_black="#020221"
-  thm_gray="#313244"
-  thm_magenta="#cba6f7"
-  thm_pink="#ff761a"
-  thm_red="#ff3600"
-  thm_green="#b2bc55"
-  thm_yellow="#ffd392"
-  thm_blue="#99a4bc"
-  thm_orange="#ff761a"
-  thm_black4="#020221"
+  thm_cyan="#9cdcfe"
+  thm_black="#000815"
+  thm_gray="#1b2436"
+  thm_magenta="#a179fb"
+  thm_pink="#fc60a1"
+  thm_red="#fb5474"
+  thm_green="#66ffb4"
+  thm_yellow="#fbe179"
+  thm_blue="#4d91fb"
+  thm_orange="#a179fb"
+  thm_black4="#000815"
 
   # status
   set status "on"
@@ -71,7 +71,7 @@ main() {
 
   # panes
   set pane-border-style "fg=${thm_gray}"
-  set pane-active-border-style "fg=${thm_blue}"
+  set pane-active-border-style "fg=${thm_magenta}"
 
   # windows
   setw window-status-activity-style "fg=${thm_fg},bg=${thm_bg},none"
@@ -113,14 +113,14 @@ main() {
   readonly show_window="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #[fg=$thm_fg,bg=$thm_gray] #W #{?client_prefix,#[fg=$thm_red]"
 
   local show_session
-  readonly show_session="#[fg=$thm_green]}#[bg=$thm_gray]$right_separator#{?client_prefix,#[bg=$thm_red],#[bg=$thm_green]}#[fg=$thm_bg] #[fg=$thm_fg,bg=$thm_gray] #S "
+  readonly show_session="#[fg=$thm_green]#[bg=$thm_gray]$right_separator#{?client_prefix,#[bg=$thm_red],#[bg=$thm_green]}#[fg=$thm_bg] #[fg=$thm_fg,bg=$thm_gray] #S "
 
   local show_directory_in_window_status
   #readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} "
   readonly show_directory_in_window_status="#[fg=$thm_fg,bg=$thm_bg] #I #[fg=$thm_fg,bg=$thm_gray] (#W) #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) "
   local show_directory_in_window_status_current
   #readonly show_directory_in_window_status_current="#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_bg] #{b:pane_current_path} "
-  readonly show_directory_in_window_status_current="#[fg=colour232,bg=$thm_orange] #I #[fg=colour255,bg=colour237] (#W) #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) "
+  readonly show_directory_in_window_status_current="#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_gray] (#W) #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) "
 
   local show_window_in_window_status
   readonly show_window_in_window_status="#[fg=$thm_fg,bg=$thm_bg] #W #[fg=$thm_bg,bg=$thm_blue] #I#[fg=$thm_blue,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics] "

@@ -1,0 +1,39 @@
+/* DracOwl-inspired content styling for internal Firefox pages */
+
+@-moz-document url-prefix("about:"),
+url-prefix("chrome://"),
+url-prefix("resource://") {
+  :root {
+    --do-bg: #030c1b !important;
+    --do-bg-alt: #000815 !important;
+    --do-surface: #1b2436 !important;
+    --do-fg: #cccccc !important;
+    --do-muted: #7f848e !important;
+    --do-accent: #a179fb !important;
+    --do-cyan: #9cdcfe !important;
+  }
+
+  body,
+  html {
+    background: var(--do-bg) !important;
+    color: var(--do-fg) !important;
+  }
+
+  a {
+    color: var(--do-cyan) !important;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    background: var(--do-bg-alt) !important;
+    color: var(--do-fg) !important;
+    border-color: var(--do-surface) !important;
+  }
+
+  ::selection {
+    background: #264f78 !important;
+    color: var(--do-fg) !important;
+  }
+}

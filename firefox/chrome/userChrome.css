@@ -1,0 +1,83 @@
+/* DracOwl-inspired Firefox chrome theme */
+
+:root {
+  --do-bg: #030c1b !important;
+  --do-bg-alt: #000815 !important;
+  --do-surface: #1b2436 !important;
+  --do-fg: #cccccc !important;
+  --do-muted: #7f848e !important;
+  --do-accent: #a179fb !important;
+  --do-cyan: #9cdcfe !important;
+  --do-pink: #fc60a1 !important;
+  --do-red: #fb5474 !important;
+}
+
+#navigator-toolbox {
+  background-color: var(--do-bg-alt) !important;
+  border-bottom: 1px solid var(--do-surface) !important;
+}
+
+#TabsToolbar,
+#titlebar {
+  background-color: var(--do-bg) !important;
+}
+
+.tabbrowser-tab .tab-background {
+  background-color: transparent !important;
+}
+
+.tabbrowser-tab .tab-label {
+  color: var(--do-muted) !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-background {
+  background-color: var(--do-surface) !important;
+  border-bottom: 2px solid var(--do-accent) !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-label {
+  color: var(--do-fg) !important;
+}
+
+#urlbar-background,
+#searchbar {
+  background-color: var(--do-bg) !important;
+  border: 1px solid var(--do-surface) !important;
+  color: var(--do-fg) !important;
+}
+
+#urlbar[focused="true"] > #urlbar-background,
+#urlbar[open="true"] > #urlbar-background {
+  border-color: var(--do-accent) !important;
+}
+
+#urlbar-input,
+.searchbar-textbox {
+  color: var(--do-fg) !important;
+}
+
+#urlbar-input::placeholder,
+.searchbar-textbox::placeholder {
+  color: var(--do-muted) !important;
+}
+
+toolbarbutton {
+  color: var(--do-fg) !important;
+}
+
+toolbarbutton:hover {
+  background-color: var(--do-surface) !important;
+}
+
+#PersonalToolbar,
+#sidebar-box,
+#sidebar-header {
+  background-color: var(--do-bg) !important;
+  color: var(--do-fg) !important;
+}
+
+#statuspanel-label {
+  background-color: var(--do-bg-alt) !important;
+  color: var(--do-cyan) !important;
+  border-color: var(--do-surface) !important;
+}

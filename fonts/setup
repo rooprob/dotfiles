@@ -10,6 +10,7 @@ if [ ! -e ~/.fonts/BlexMonoNerdFont-BoldItalic.ttf ]; then
 	pushd ~/.fonts || exit
 	unzip ~/Downloads/IBMPlexMono.zip
 	popd || exit
-
-	fc-cache -fv
 fi
+
+rsync -avx sans-serify/ ~/.fonts 
+fc-cache -fv

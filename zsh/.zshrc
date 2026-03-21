@@ -19,6 +19,19 @@ plugins=(git
 zstyle ':omz:plugins:nvm' lazy yes
 source $ZSH/oh-my-zsh.sh
 
+# DracOwl-inspired ls colors for macOS (BSD ls) and Linux (GNU ls).
+if [[ "$OSTYPE" == darwin* ]]; then
+    export CLICOLOR=1
+    export LSCOLORS="ExGxFxDxCxDeDfhaadacae"
+    alias ls='ls -G'
+else
+    export LS_COLORS="di=38;5;75:ln=38;5;117:so=38;5;176:pi=38;5;221:ex=38;5;121:bd=38;5;221;48;5;17:cd=38;5;221;48;5;17:su=37;41:sg=30;43:tw=30;42:ow=30;46:*.tar=38;5;176:*.tgz=38;5;176:*.gz=38;5;176:*.zip=38;5;176:*.xz=38;5;176:*.bz2=38;5;176:*.7z=38;5;176:*.jpg=38;5;117:*.jpeg=38;5;117:*.png=38;5;117:*.gif=38;5;117"
+    alias ls='ls --color=auto'
+fi
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
 export PYENV_ROOT="$HOME/.pyenv"
 export RBENV_ROOT="$HOME/.rbenv"
 export GOPATH=~/go

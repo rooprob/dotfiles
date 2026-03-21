@@ -1,0 +1,4 @@
+#!/bin/bash
+
+[ -d ~/.config/ghostty ] || mkdir -p ~/.config/ghostty
+cp config ~/.config/ghostty/config

@@ -126,13 +126,17 @@ PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+# DracOwl-inspired ls colors for macOS (BSD ls) and Linux (GNU ls).
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export CLICOLOR=1
+    export LSCOLORS="ExGxFxDxCxDeDfhaadacae"
+    alias ls='ls -G'
+else
+    export LS_COLORS="di=38;5;75:ln=38;5;117:so=38;5;176:pi=38;5;221:ex=38;5;121:bd=38;5;221;48;5;17:cd=38;5;221;48;5;17:su=37;41:sg=30;43:tw=30;42:ow=30;46:*.tar=38;5;176:*.tgz=38;5;176:*.gz=38;5;176:*.zip=38;5;176:*.xz=38;5;176:*.bz2=38;5;176:*.7z=38;5;176:*.jpg=38;5;117:*.jpeg=38;5;117:*.png=38;5;117:*.gif=38;5;117"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+fi
 
+if grep --help 2>&1 | command grep -q -- '--color'; then
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'

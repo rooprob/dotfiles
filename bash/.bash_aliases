@@ -22,6 +22,5 @@ alias gp="git pull"
 alias gs="git status"
 alias lg="lazygit"
 
-alias ls="ls --color=auto"
 alias la="ls -lathr"
 alias lm='find . -type f -not  -path "*/\.*" -exec ls {} +'
