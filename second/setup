@@ -1,24 +1,34 @@
 #!/bin/bash
+set -euo pipefail
 # vim: set ft=sh:
 #
 # requires: ~/.config/second/home exports into shell, see ~/.zshrc
 
-if [ -z "$SECOND_HOME" ]; then
-	echo "❌SECOND_HOME not set!"
-	exit 1
+if [ -z "${SECOND_HOME:-}" ] && [ -f "$HOME/.config/second/home" ]; then
+    set -a
+    # shellcheck disable=SC1090
+    . "$HOME/.config/second/home"
+    set +a
+fi
+
+if [ -z "${SECOND_HOME:-}" ]; then
+    echo "error: SECOND_HOME not set"
+    exit 1
 fi
 
 _create_dir() {
-	echo "🧠 installing $1"
-	[ ! -d "$1" ] && mkdir -p "$1"
+    local dir="$1"
+    [ -z "$dir" ] && return
+    echo "installing $dir"
+    [ ! -d "$dir" ] && mkdir -p "$dir"
 }
 
 # second brain
 _create_dir "$SECOND_HOME"
 
 # kindle-highlights
-_create_dir "$KINDLE_HOME"
+_create_dir "${KINDLE_HOME:-$SECOND_HOME/kindle-highlights}"
 
 # website
-_create_dir "$WEBSITE_HOME"
-_create_dir "$BLOG_HOME"
+_create_dir "${WEBSITE_HOME:-$HOME/websites}"
+_create_dir "${BLOG_HOME:-$HOME/websites/blog}"

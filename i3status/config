@@ -17,7 +17,7 @@ wireless wlp114s0 {
 }
 ethernet eth0 {
     format_up = "E: %ip (%speed)"
-    format_down = "W: down"
+    format_down = "E: down"
 }
 battery 0 {
     format = "%status %percentage %remaining %emptytime"

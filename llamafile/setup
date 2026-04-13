@@ -1,11 +1,19 @@
 #!/bin/bash
+set -euo pipefail
 
-if [ ! -e /usr/bin/ape ]; then
-
-  sudo wget -O /usr/bin/ape https://cosmo.zip/pub/cosmos/bin/ape-$(uname -m).elf
-  sudo chmod +x /usr/bin/ape
-  sudo sh -c "echo ':APE:M::MZqFpD::/usr/bin/ape:' >/proc/sys/fs/binfmt_misc/register"
-  sudo sh -c "echo ':APE-jart:M::jartsr::/usr/bin/ape:' >/proc/sys/fs/binfmt_misc/register"
-
+if [ "$(uname -s)" != "Linux" ]; then
+    echo "info: llamafile setup is Linux-only (skip)"
+    exit 0
 fi
 
+if [ ! -e /usr/bin/ape ]; then
+    sudo wget -O /usr/bin/ape "https://cosmo.zip/pub/cosmos/bin/ape-$(uname -m).elf"
+    sudo chmod +x /usr/bin/ape
+fi
+
+if [ -e /proc/sys/fs/binfmt_misc/register ]; then
+    sudo sh -c "echo ':APE:M::MZqFpD::/usr/bin/ape:' >/proc/sys/fs/binfmt_misc/register"
+    sudo sh -c "echo ':APE-jart:M::jartsr::/usr/bin/ape:' >/proc/sys/fs/binfmt_misc/register"
+else
+    echo "warning: binfmt_misc register is unavailable on this host"
+fi

@@ -122,7 +122,7 @@ bindsym $mod+$right exec papersway-msg focus right
 bindsym $mod+Shift+$left exec papersway-msg move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move exec papersway-msg right
+bindsym $mod+Shift+$right exec papersway-msg move right
 
 bindsym $mod+f exec papersway-msg monocle toggle
 bindsym $mod+o exec papersway-msg other column

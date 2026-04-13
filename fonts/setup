@@ -1,16 +1,25 @@
 #!/bin/bash
+set -euo pipefail
 
-if [ ! -e ~/Downloads/IBMPlexMono.zip ]; then
-	curl -fLo ~/Downloads/IBMPlexMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/IBMPlexMono.zip
-fi
-if [ ! -d ~/.fonts ]; then
-	mkdir ~/.fonts
-fi
-if [ ! -e ~/.fonts/BlexMonoNerdFont-BoldItalic.ttf ]; then
-	pushd ~/.fonts || exit
-	unzip ~/Downloads/IBMPlexMono.zip
-	popd || exit
+zip_path="$HOME/Downloads/IBMPlexMono.zip"
+if [ "$(uname -s)" = "Darwin" ]; then
+    font_dir="$HOME/Library/Fonts"
+else
+    font_dir="$HOME/.local/share/fonts"
 fi
 
-rsync -avx sans-serify/ ~/.fonts 
-fc-cache -fv
+mkdir -p "$HOME/Downloads" "$font_dir"
+
+if [ ! -e "$zip_path" ]; then
+    curl -fLo "$zip_path" https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/IBMPlexMono.zip
+fi
+
+if [ ! -e "$font_dir/BlexMonoNerdFont-BoldItalic.ttf" ]; then
+    unzip -o "$zip_path" -d "$font_dir"
+fi
+
+rsync -avx sans-serif/ "$font_dir"/
+
+if command -v fc-cache >/dev/null 2>&1; then
+    fc-cache -fv
+fi

@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+
+if [ "$(uname -s)" != "Linux" ]; then
+    echo "info: i3status setup is Linux-only (skip)"
+    exit 0
+fi
+
+mkdir -p "$HOME/.config/i3status"
+cp config "$HOME/.config/i3status/config"

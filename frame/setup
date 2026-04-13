@@ -1,23 +1,30 @@
 #!/bin/bash
+set -euo pipefail
 
 [ -d frame ] || git clone https://github.com/lelanthran/frame
 [ -d frame ] && {
-    pushd frame
-    git pull
-    popd
+    pushd frame >/dev/null || exit
+    git pull --ff-only
+    popd >/dev/null || exit
 }
 
-pushd frame
+pushd frame >/dev/null || exit
 
 if [ ! -d /opt/frame ]; then
     echo "Needing sudo password please ..."
-    sudo mkdir -u $USER mkdir /opt/frame
+    sudo mkdir -p /opt/frame
+    sudo chown "$USER" /opt/frame
 fi
 
 make release INSTALL_PREFIX=/opt/frame TARGET=""
 
-if [ ! -e ~/.bin/frame ]; then
-    ln -s /opt/frame/bin/frame.* ~/.bin/frame
+mkdir -p "$HOME/.bin"
+if compgen -G "/opt/frame/bin/frame.*" >/dev/null; then
+    ln -sfn "$(ls /opt/frame/bin/frame.* | head -n 1)" "$HOME/.bin/frame"
+elif [ -e /opt/frame/bin/frame ]; then
+    ln -sfn /opt/frame/bin/frame "$HOME/.bin/frame"
+else
+    echo "warning: no frame binary found in /opt/frame/bin"
 fi
 
-popd
+popd >/dev/null || exit

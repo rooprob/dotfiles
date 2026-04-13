@@ -1,0 +1,11 @@
+#!/bin/bash
+set -euo pipefail
+
+if [ "$(uname -s)" != "Linux" ]; then
+    echo "info: sway setup is Linux-only (skip)"
+    exit 0
+fi
+
+mkdir -p "$HOME/.config/sway/themes.d"
+cp config "$HOME/.config/sway/config"
+rsync -a themes.d/ "$HOME/.config/sway/themes.d/"

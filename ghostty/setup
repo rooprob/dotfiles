@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
-[ -d ~/.config/ghostty ] || mkdir -p ~/.config/ghostty
-cp config ~/.config/ghostty/config
+mkdir -p "$HOME/.config/ghostty"
+cp config "$HOME/.config/ghostty/config"

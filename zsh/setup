@@ -1,12 +1,11 @@
 #!/bin/bash
+set -euo pipefail
 
-if [ ! -d ~/.zsh ]; then
-	mkdir ~/.zsh
-fi
+mkdir -p "$HOME/.zsh"
 
-rsync -av .zshenv ~/.zshenv
-rsync -av .zshrc ~/.zshrc
+rsync -av .zshenv "$HOME/.zshenv"
+rsync -av .zshrc "$HOME/.zshrc"
 
-if [ ! -e "$HOME"/.zsecond ]; then
-	touch ~/.zsecond
+if [ ! -e "$HOME/.zsecond" ]; then
+    touch "$HOME/.zsecond"
 fi

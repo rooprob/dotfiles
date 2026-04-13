@@ -1,1 +1,5 @@
-cp starship.toml ~/.config
+#!/bin/bash
+set -euo pipefail
+
+mkdir -p "$HOME/.config"
+cp starship.toml "$HOME/.config/starship.toml"

@@ -1,5 +1,6 @@
 #!/bin/bash
+set -euo pipefail
 
 for file in .bashrc .profile .bash_logout .bash_aliases; do
-    cp $file ~/
+    cp "$file" "$HOME/"
 done

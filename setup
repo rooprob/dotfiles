@@ -1,21 +1,35 @@
 #!/bin/bash
+set -euo pipefail
+
 # basic install script
 # author: robf
-#
 
-things="bash firefox fonts frame ghostty i3status keyboard llamafile scripts second starship sway tmux"
+things=(bash firefox fonts frame ghostty i3status keyboard llamafile scripts second starship sway tmux)
 
 log() {
     echo "$1"
 }
 
 run_setup() {
-    log "🍺 $1"
-    pushd "$1" || exit
+    local module=$1
+    local setup_script="$module/setup"
+
+    if [ ! -d "$module" ]; then
+        log "skip: missing module directory: $module"
+        return
+    fi
+
+    if [ ! -x "$setup_script" ]; then
+        log "skip: no executable setup script: $setup_script"
+        return
+    fi
+
+    log "🍺 $module"
+    pushd "$module" >/dev/null || exit
     ./setup
-    popd || exit
+    popd >/dev/null || exit
 }
 
-for thing in $things; do
+for thing in "${things[@]}"; do
     run_setup "$thing"
 done

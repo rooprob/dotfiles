@@ -1,18 +1,30 @@
 #!/bin/bash
+set -euo pipefail
 
-diff=$(md5sum /etc/default/keyboard keyboard.default | awk '{ print $1 }' | uniq | wc -l)
-
-if [ "$diff" -eq 1 ]; then
-	exit 0
+if [ "$(uname -s)" != "Linux" ]; then
+    echo "info: keyboard setup is Linux-only (skip)"
+    exit 0
 fi
 
-sudo rsync -a keyboard.default /etc/default/keyboard
-sudo dpkg-reconfigure keyboard-configuration
+if [ ! -e /etc/default/keyboard ]; then
+    echo "info: /etc/default/keyboard not found (skip)"
+    exit 0
+fi
 
-wanted='['\''ctrl:nocaps'\'']'
-current=$(gsettings get org.gnome.desktop.input-sources xkb-options)
+target_sum="$(md5sum keyboard.default | awk '{print $1}')"
+system_sum="$(md5sum /etc/default/keyboard | awk '{print $1}')"
 
-echo "current xkb-options: $current"
-if [ "$wanted" != "$current" ]; then
-	gsettings set org.gnome.desktop.input-sources xkb-options \"['ctrl:nocaps']\"
+if [ "$target_sum" != "$system_sum" ]; then
+    sudo rsync -a keyboard.default /etc/default/keyboard
+    sudo dpkg-reconfigure keyboard-configuration
+fi
+
+if command -v gsettings >/dev/null 2>&1; then
+    wanted="['ctrl:nocaps']"
+    current="$(gsettings get org.gnome.desktop.input-sources xkb-options || true)"
+
+    echo "current xkb-options: $current"
+    if [ "$wanted" != "$current" ]; then
+        gsettings set org.gnome.desktop.input-sources xkb-options "$wanted"
+    fi
 fi
