@@ -24,6 +24,11 @@ Python uses:
 - `ruff_format` and `ruff_organize_imports` through conform
 - `ruff` and `mypy` through nvim-lint
 
+## Mason
+
+Mason is available with `:Mason` for ad hoc tools. Core LSPs, formatters, and
+linters still come from Nix.
+
 ## Nix Boundary
 
 Keep Neovim, LSP, formatter, and linter binaries in `~/System/nix-darwin-config`.

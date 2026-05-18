@@ -30,6 +30,21 @@ pcall(function()
 			group_empty = true,
 		},
 	})
+
+	vim.api.nvim_create_autocmd("VimEnter", {
+		group = vim.api.nvim_create_augroup("UserNvimTreeStart", { clear = true }),
+		callback = function(data)
+			local path = data.file
+			local stat = path ~= "" and vim.uv.fs_stat(path) or nil
+
+			if stat and stat.type == "file" then
+				require("nvim-tree.api").tree.open()
+				return
+			end
+
+			require("nvim-tree.api").tree.open({ path = path ~= "" and path or vim.uv.cwd() })
+		end,
+	})
 end)
 
 pcall(function()
