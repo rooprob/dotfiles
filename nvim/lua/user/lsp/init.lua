@@ -44,6 +44,9 @@ setup("yamlls")
 setup("taplo")
 setup("jsonls")
 setup("marksman")
+if vim.fn.executable("typescript-language-server") == 1 then
+	setup("ts_ls")
+end
 setup("lua_ls", {
 	settings = {
 		Lua = {
