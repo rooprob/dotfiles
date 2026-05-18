@@ -1,5 +1,8 @@
+window-padding-x = 32
+window-padding-y = 32
+
 theme = Aardvark Blue
 background = #030c1b
 font-family = JetBrainsMono Nerd Font
-font-size = 13
+font-size = 11
 term = xterm-256color
