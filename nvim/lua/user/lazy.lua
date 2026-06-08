@@ -52,6 +52,7 @@ require("lazy").setup({
 	"windwp/nvim-autopairs",
 	"stevearc/conform.nvim",
 	"mfussenegger/nvim-lint",
+	"christoomey/vim-tmux-navigator",
 	"NvChad/base46",
 	"NvChad/ui",
 }, {
