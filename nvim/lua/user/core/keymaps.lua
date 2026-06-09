@@ -2,6 +2,12 @@ local map = vim.keymap.set
 
 map("n", "<leader>w", "<cmd>w<CR>", { silent = true, desc = "Write" })
 map("n", "<leader>q", "<cmd>q<CR>", { silent = true, desc = "Quit" })
+map("n", "<leader><Tab>", "<C-^>", { desc = "Alternate buffer" })
+map("n", "<leader>bd", "<cmd>bdelete<CR>", { silent = true, desc = "Delete buffer" })
+map("n", "<leader>bn", "<cmd>bnext<CR>", { silent = true, desc = "Next buffer" })
+map("n", "<leader>bp", "<cmd>bprevious<CR>", { silent = true, desc = "Previous buffer" })
+map("n", "]b", "<cmd>bnext<CR>", { silent = true, desc = "Next buffer" })
+map("n", "[b", "<cmd>bprevious<CR>", { silent = true, desc = "Previous buffer" })
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true, desc = "Clear search" })
 
 -- Navigation handled by vim-tmux-navigator

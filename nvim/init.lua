@@ -21,5 +21,6 @@ require("user.lsp")
 
 pcall(require, "user.lang.python")
 pcall(require, "user.lang.go")
+pcall(require, "user.lang.node")
 pcall(require, "user.lang.odin")
 pcall(require, "user.lang.nix")

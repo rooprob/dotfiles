@@ -13,11 +13,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code action" }))
 		vim.keymap.set("n", "<leader>f", function()
 			vim.lsp.buf.format({ async = true })
-		end, opts)
+		end, vim.tbl_extend("force", opts, { desc = "Format buffer" }))
 	end,
 })
 
@@ -44,9 +44,6 @@ setup("yamlls")
 setup("taplo")
 setup("jsonls")
 setup("marksman")
-if vim.fn.executable("typescript-language-server") == 1 then
-	setup("ts_ls")
-end
 setup("lua_ls", {
 	settings = {
 		Lua = {

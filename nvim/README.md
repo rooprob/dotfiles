@@ -24,10 +24,34 @@ Python uses:
 - `ruff_format` and `ruff_organize_imports` through conform
 - `ruff` and `mypy` through nvim-lint
 
+## Node
+
+Node/TypeScript uses:
+
+- `ts_ls` for TypeScript and JavaScript language support
+- `eslint` LSP for diagnostics, code actions, and fix-all on save
+- `prettier` through conform for formatting
+
+## Finding
+
+Primary search mappings:
+
+- `<leader><space>` finds files, including hidden files while respecting ignores
+- `<leader>/` ripgreps project text, including hidden files while skipping build output
+- `<leader>,` switches buffers, sorted by most recently used
+- `<leader><Tab>` jumps to the alternate buffer
+- `]b` and `[b` move to next/previous buffers
+- `<leader>fr` opens recent files
+- `<leader>bd` deletes the current buffer without quitting the window
+
+Which-key groups leader mappings into `buffers`, `find`, `diagnostics`, and
+language-specific groups so the `<space>` popup is scannable.
+
 ## Mason
 
-Mason is available with `:Mason` for ad hoc tools. Core LSPs, formatters, and
-linters still come from Nix.
+Mason is available with `:Mason` for ad hoc tools. The TypeScript and ESLint
+language servers are ensured through Mason. Core formatters and linters still
+come from Nix.
 
 ## Nix Boundary
 

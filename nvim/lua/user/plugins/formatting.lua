@@ -18,6 +18,8 @@ if ok_conform then
 			typescript = { "prettier" },
 			typescriptreact = { "prettier" },
 			vue = { "prettier" },
+			svelte = { "prettier" },
+			astro = { "prettier" },
 			python = { "ruff_format", "ruff_organize_imports" },
 			go = { "gofumpt", "goimports" },
 		},

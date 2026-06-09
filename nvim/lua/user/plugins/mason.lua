@@ -11,6 +11,10 @@ mason.setup({
 
 pcall(function()
 	require("mason-lspconfig").setup({
+		ensure_installed = {
+			"eslint",
+			"ts_ls",
+		},
 		automatic_enable = false,
 	})
 end)

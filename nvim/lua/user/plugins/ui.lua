@@ -70,7 +70,37 @@ pcall(function()
 end)
 
 pcall(function()
-	require("which-key").setup()
+	local wk = require("which-key")
+
+	wk.setup()
+
+	local groups = {
+		{ "<leader>b", group = "buffers" },
+		{ "<leader>c", group = "code" },
+		{ "<leader>f", group = "find" },
+		{ "<leader>g", group = "go" },
+		{ "<leader>n", group = "node/nix" },
+		{ "<leader>o", group = "odin" },
+		{ "<leader>p", group = "python" },
+		{ "<leader>r", group = "rename" },
+		{ "<leader>x", group = "diagnostics" },
+	}
+
+	if type(wk.add) == "function" then
+		wk.add(groups)
+	else
+		wk.register({
+			b = { name = "buffers" },
+			c = { name = "code" },
+			f = { name = "find" },
+			g = { name = "go" },
+			n = { name = "node/nix" },
+			o = { name = "odin" },
+			p = { name = "python" },
+			r = { name = "rename" },
+			x = { name = "diagnostics" },
+		}, { prefix = "<leader>" })
+	end
 end)
 
 pcall(function()
