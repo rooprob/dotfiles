@@ -39,7 +39,10 @@ Primary search mappings:
 - `<leader><space>` finds files, including hidden files while respecting ignores
 - `<leader>/` ripgreps project text, including hidden files while skipping build output
 - `<leader>,` switches buffers, sorted by most recently used
-- `<leader><Tab>` jumps to the alternate buffer
+- `<leader>bb` switches buffers, sorted by most recently used
+- `<leader>ba` jumps to the alternate buffer
+- `<leader><Tab>` also jumps to the alternate buffer
+- `<leader>bk` deletes the current buffer without quitting the window
 - `]b` and `[b` move to next/previous buffers
 - `<leader>fr` opens recent files
 - `<leader>bd` deletes the current buffer without quitting the window

@@ -3,6 +3,8 @@ if not ok then
 	return
 end
 
+local actions = require("telescope.actions")
+
 telescope.setup({
 	defaults = {
 		vimgrep_arguments = {
@@ -27,8 +29,20 @@ telescope.setup({
 		},
 		mappings = {
 			i = {
-				["<C-u>"] = false,
-				["<C-d>"] = false,
+				["<C-j>"] = actions.move_selection_next,
+				["<C-k>"] = actions.move_selection_previous,
+				["<C-n>"] = actions.move_selection_next,
+				["<C-p>"] = actions.move_selection_previous,
+				["<Tab>"] = actions.move_selection_next,
+				["<S-Tab>"] = actions.move_selection_previous,
+				["<C-f>"] = actions.preview_scrolling_down,
+				["<C-b>"] = actions.preview_scrolling_up,
+			},
+			n = {
+				["j"] = actions.move_selection_next,
+				["k"] = actions.move_selection_previous,
+				["<C-f>"] = actions.preview_scrolling_down,
+				["<C-b>"] = actions.preview_scrolling_up,
 			},
 		},
 	},
@@ -74,6 +88,7 @@ end
 map("n", "<leader><space>", find_files, { desc = "Find files" })
 map("n", "<leader>/", live_grep, { desc = "Live grep" })
 map("n", "<leader>,", buffers, { desc = "Buffers" })
+map("n", "<leader>bb", buffers, { desc = "Buffer picker" })
 map("n", "<leader>ff", find_files, { desc = "Find files" })
 map("n", "<leader>fg", live_grep, { desc = "Live grep" })
 map("n", "<leader>fb", buffers, { desc = "Buffers" })
