@@ -43,7 +43,6 @@ setup("bashls")
 setup("yamlls")
 setup("taplo")
 setup("jsonls")
-setup("marksman")
 setup("lua_ls", {
 	settings = {
 		Lua = {

@@ -42,6 +42,9 @@ pcall(function()
 			-- Only open nvim-tree if no file was specified or if opening a directory
 			if not stat or stat.type == "directory" then
 				require("nvim-tree.api").tree.open({ path = path ~= "" and path or vim.uv.cwd() })
+				-- Return focus to the main window so pickers (telescope etc.) open
+				-- files there instead of creating spurious No Name buffers.
+				vim.cmd("wincmd p")
 			end
 		end,
 	})
@@ -51,20 +54,23 @@ pcall(function()
 		group = group,
 		pattern = "NvimTree*",
 		callback = function()
-			local wins = vim.api.nvim_list_wins()
-			-- Count non-NvimTree windows
-			local real_wins = 0
-			for _, win in ipairs(wins) do
-				local buf = vim.api.nvim_win_get_buf(win)
-				local ft = vim.api.nvim_get_option_value("filetype", { buf = buf })
-				if ft ~= "NvimTree" then
-					real_wins = real_wins + 1
+			-- Schedule so Telescope (and other pickers) have time to open
+			-- their target buffer before we count real windows.
+			vim.schedule(function()
+				local wins = vim.api.nvim_list_wins()
+				local real_wins = 0
+				for _, win in ipairs(wins) do
+					local buf = vim.api.nvim_win_get_buf(win)
+					local ft = vim.api.nvim_get_option_value("filetype", { buf = buf })
+					if ft ~= "NvimTree" then
+						real_wins = real_wins + 1
+					end
 				end
-			end
 
-			if real_wins == 0 then
-				vim.cmd("quit")
-			end
+				if real_wins == 0 then
+					vim.cmd("quit")
+				end
+			end)
 		end,
 	})
 end)
