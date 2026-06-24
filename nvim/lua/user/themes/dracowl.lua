@@ -22,10 +22,7 @@ local function hl(group, opts)
 	vim.api.nvim_set_hl(0, group, opts)
 end
 
-function M.setup()
-	vim.cmd.colorscheme("catppuccin-mocha")
-	vim.g.colors_name = "dracowl"
-
+function M.apply()
 	local c = M.palette
 	hl("Normal", { fg = c.fg, bg = c.bg })
 	hl("NormalFloat", { fg = c.fg, bg = c.bg_alt })
@@ -46,6 +43,11 @@ function M.setup()
 	hl("GitSignsAdd", { fg = c.green })
 	hl("GitSignsChange", { fg = c.yellow })
 	hl("GitSignsDelete", { fg = c.red })
+end
+
+function M.setup()
+	vim.cmd.colorscheme("catppuccin-mocha")
+	M.apply()
 end
 
 return M

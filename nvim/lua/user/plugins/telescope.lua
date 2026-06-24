@@ -1,98 +1,55 @@
-local ok, telescope = pcall(require, "telescope")
-if not ok then
-	return
-end
-
-local actions = require("telescope.actions")
-
-telescope.setup({
-	defaults = {
-		vimgrep_arguments = {
-			"rg",
-			"--color=never",
-			"--no-heading",
-			"--with-filename",
-			"--line-number",
-			"--column",
-			"--smart-case",
-			"--hidden",
-			"--glob",
-			"!**/.git/*",
-			"--glob",
-			"!**/node_modules/*",
-			"--glob",
-			"!**/dist/*",
-			"--glob",
-			"!**/build/*",
-			"--glob",
-			"!**/.next/*",
+return {
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
-		mappings = {
-			i = {
-				["<C-j>"] = actions.move_selection_next,
-				["<C-k>"] = actions.move_selection_previous,
-				["<C-n>"] = actions.move_selection_next,
-				["<C-p>"] = actions.move_selection_previous,
-				["<Tab>"] = actions.move_selection_next,
-				["<S-Tab>"] = actions.move_selection_previous,
-				["<C-f>"] = actions.preview_scrolling_down,
-				["<C-b>"] = actions.preview_scrolling_up,
-			},
-			n = {
-				["j"] = actions.move_selection_next,
-				["k"] = actions.move_selection_previous,
-				["<C-f>"] = actions.preview_scrolling_down,
-				["<C-b>"] = actions.preview_scrolling_up,
-			},
+		opts = function(_, opts)
+			local actions = require("telescope.actions")
+			opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
+				vimgrep_arguments = {
+					"rg", "--color=never", "--no-heading", "--with-filename",
+					"--line-number", "--column", "--smart-case", "--hidden",
+					"--glob", "!**/.git/*", "--glob", "!**/node_modules/*",
+					"--glob", "!**/dist/*", "--glob", "!**/build/*", "--glob", "!**/.next/*",
+				},
+				mappings = {
+					i = {
+						["<C-j>"] = actions.move_selection_next,
+						["<C-k>"] = actions.move_selection_previous,
+						["<C-n>"] = actions.move_selection_next,
+						["<C-p>"] = actions.move_selection_previous,
+						["<Tab>"] = actions.move_selection_next,
+						["<S-Tab>"] = actions.move_selection_previous,
+						["<C-f>"] = actions.preview_scrolling_down,
+						["<C-b>"] = actions.preview_scrolling_up,
+					},
+					n = {
+						["j"] = actions.move_selection_next,
+						["k"] = actions.move_selection_previous,
+						["<C-f>"] = actions.preview_scrolling_down,
+						["<C-b>"] = actions.preview_scrolling_up,
+					},
+				},
+			})
+			return opts
+		end,
+		keys = {
+			{ "<leader><space>", function() require("telescope.builtin").find_files({ hidden = true }) end, desc = "Find files" },
+			{ "<leader>/", function()
+				require("telescope.builtin").live_grep({ additional_args = {
+					"--hidden", "--glob", "!**/.git/*", "--glob", "!**/node_modules/*",
+				}})
+			end, desc = "Live grep" },
+			{ "<leader>,", function() require("telescope.builtin").buffers({ sort_mru = true, ignore_current_buffer = true }) end, desc = "Buffers" },
+			{ "<leader>ff", function() require("telescope.builtin").find_files({ hidden = true }) end, desc = "Find files" },
+			{ "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Live grep" },
+			{ "<leader>fb", function() require("telescope.builtin").buffers({ sort_mru = true, ignore_current_buffer = true }) end, desc = "Buffers" },
+			{ "<leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "Recent files" },
+			{ "<leader>fw", function() require("telescope.builtin").grep_string() end, desc = "Grep word" },
+			{ "<leader>fc", function() require("telescope.builtin").commands() end, desc = "Commands" },
+			{ "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "Help tags" },
 		},
 	},
-})
-
-pcall(telescope.load_extension, "fzf")
-
-local builtin = require("telescope.builtin")
-local map = vim.keymap.set
-
-local function find_files()
-	builtin.find_files({
-		hidden = true,
-		no_ignore = false,
-	})
-end
-
-local function live_grep()
-	builtin.live_grep({
-		additional_args = {
-			"--hidden",
-			"--glob",
-			"!**/.git/*",
-			"--glob",
-			"!**/node_modules/*",
-			"--glob",
-			"!**/dist/*",
-			"--glob",
-			"!**/build/*",
-			"--glob",
-			"!**/.next/*",
-		},
-	})
-end
-
-local function buffers()
-	builtin.buffers({
-		sort_mru = true,
-		ignore_current_buffer = true,
-	})
-end
-
-map("n", "<leader><space>", find_files, { desc = "Find files" })
-map("n", "<leader>/", live_grep, { desc = "Live grep" })
-map("n", "<leader>,", buffers, { desc = "Buffers" })
-map("n", "<leader>bb", buffers, { desc = "Buffer picker" })
-map("n", "<leader>ff", find_files, { desc = "Find files" })
-map("n", "<leader>fg", live_grep, { desc = "Live grep" })
-map("n", "<leader>fb", buffers, { desc = "Buffers" })
-map("n", "<leader>fr", builtin.oldfiles, { desc = "Recent files" })
-map("n", "<leader>fw", builtin.grep_string, { desc = "Grep word" })
-map("n", "<leader>fc", builtin.commands, { desc = "Commands" })
-map("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
+}

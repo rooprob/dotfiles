@@ -1,7 +1,2 @@
-pcall(function()
-	require("Comment").setup()
-end)
-
-pcall(function()
-	require("nvim-autopairs").setup()
-end)
+-- LazyVim includes mini.comment and nvim-autopairs; nothing extra needed here.
+return {}

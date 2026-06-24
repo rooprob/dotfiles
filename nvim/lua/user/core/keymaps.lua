@@ -18,6 +18,5 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true, desc = "Clear search" 
 -- map("n", "<C-k>", "<C-w>k", { desc = "Move up" })
 -- map("n", "<C-l>", "<C-w>l", { desc = "Move right" })
 
-map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { silent = true, desc = "File tree" })
-map("n", "<leader>xx", vim.diagnostic.setqflist, { desc = "Diagnostics quickfix" })
-map("n", "<leader>xd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+-- <leader>e handled by nvim-tree plugin spec
+-- <leader>x* handled by LazyVim
