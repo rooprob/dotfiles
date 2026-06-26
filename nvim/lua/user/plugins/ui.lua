@@ -1,5 +1,11 @@
 return {
 	{
+		"folke/snacks.nvim",
+		opts = {
+			dashboard = { enabled = false },
+		},
+	},
+	{
 		"folke/which-key.nvim",
 		opts = {
 			spec = {

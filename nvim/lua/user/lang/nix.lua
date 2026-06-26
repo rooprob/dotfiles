@@ -3,8 +3,8 @@ return {
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
-				nixd = {},
-				nil_ls = {},
+				nixd = { mason = false },
+				nil_ls = { mason = false },
 			},
 		},
 		init = function()
